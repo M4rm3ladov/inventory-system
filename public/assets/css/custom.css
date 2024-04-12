@@ -1,0 +1,13 @@
+.nav-pills li a:hover {
+    background-color: rgb(83, 83, 252);    
+}
+
+.no-gutters {
+    padding-right: 0;
+    padding-left: 0;  
+}
+
+a.logout:hover {
+    background-color: #BB2D3B;
+    color: #fff;
+}
