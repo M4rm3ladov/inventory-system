@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
-
+    'title' => 'Inventory System',
     /*
     |--------------------------------------------------------------------------
     | Application Name
