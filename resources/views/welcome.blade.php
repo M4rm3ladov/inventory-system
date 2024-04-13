@@ -69,7 +69,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" aria-current="page" href="#">
                                 <i class="fa fa-toolbox"></i>
-                                <span class="ms-2">Services</span>
+                                <span class="ms-2">Service</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -162,10 +162,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Item</p>
+                                                <p class="card-text">Item</p>
                                         </div>
                                         <i class="fa fa-cart-shopping fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -178,10 +178,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Service</p>
+                                                <p class="card-text">Service</p>
                                         </div>
                                         <i class="fa fa-toolbox fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -194,10 +194,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Category</p>
+                                                <p class="card-text">Category</p>
                                         </div>
                                         <i class="fa fa-network-wired fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -210,10 +210,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Brand</p>
+                                                <p class="card-text">Brand</p>
                                         </div>
                                         <i class="fa fa-tag fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -226,10 +226,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Branch</p>
+                                                <p class="card-text">Branch</p>
                                         </div>
                                         <i class="fa fa-building fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -242,10 +242,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Supplier</p>
+                                                <p class="card-text">Supplier</p>
                                         </div>
                                         <i class="fa fa-truck fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -258,10 +258,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Stock Purchased</p>
+                                                <p class="card-text">Stock Purchased</p>
                                         </div>
                                         <i class="fa fa-dolly fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -274,10 +274,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Stock Returned</p>
+                                                <p class="card-text">Stock Returned</p>
                                         </div>
                                         <i class="fa fa-truck-ramp-box fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -290,10 +290,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Stock Transfered</p>
+                                                <p class="card-text">Stock Transfered</p>
                                         </div>
                                         <i class="fa fa-people-carry-box fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -306,10 +306,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Stock Disposed</p>
+                                                <p class="card-text">Stock Disposed</p>
                                         </div>
                                         <i class="fa fa-dumpster fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -322,10 +322,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">Stock Adjusted</p>
+                                                <p class="card-text">Stock Adjusted</p>
                                         </div>
                                         <i class="fa fa-clipboard-list fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -338,10 +338,10 @@
                                     <div class="d-flex flex-row justify-content-between">
                                         <div>
                                             <h1 class="card-title">0</h5>
-                                            <p class="card-text">System Users</p>
+                                                <p class="card-text">System Users</p>
                                         </div>
                                         <i class="fa fa-id-card fa-4x"></i>
-                                    </div>        
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a class="text-decoration-none" href="">More Info</a>
@@ -350,7 +350,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
