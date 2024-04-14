@@ -10,13 +10,13 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="#sidemenu" data-bs-toggle="collapse" class="nav-link text-white" aria-controls="sidemenu"
+                <a href="#productmenu" data-bs-toggle="collapse" class="nav-link text-white" aria-controls="productmenu"
                     aria-current="page" role="button">
                     <i class="fa fa-box"></i>
                     <span class="ms-2">Product</span>
                     <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="sidemenu" data-bs-parent="#menu">
+                <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="productmenu" data-bs-parent="#menu">
                     <li class="nav-item">
                         <a href="" class="nav-link text-white" aria-current="page">
                             <i class="fa fa-cart-shopping"></i>
@@ -44,10 +44,26 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#">
+                <a href="#servicemenu" data-bs-toggle="collapse" class="nav-link text-white" aria-controls="servicemenu"
+                    aria-current="page" role="button">
                     <i class="fa fa-toolbox"></i>
                     <span class="ms-2">Service</span>
+                    <i class="fa fa-caret-down"></i>
                 </a>
+                <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="servicemenu" data-bs-parent="#menu">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-white" aria-current="page">
+                            <i class="fa fa-wrench"></i>
+                            <span class="ms-2">Item</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-white" aria-current="page">
+                            <i class="fa fa-network-wired"></i>
+                            <span class="ms-2">Category</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
             <li class="nav-item">
