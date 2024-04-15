@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('stock_ins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('inventory_id');
+            $table->foreignId('supplier_id');
+            $table->bigInteger('ref_number');
+            $table->integer('quantity');
+            $table->text('remarks');
+            $table->timestamp('transact_date');
             $table->timestamps();
         });
     }

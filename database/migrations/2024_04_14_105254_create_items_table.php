@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('brand_id');
+            $table->foreignId('unit_id');
+            $table->foreignId('item_category_id');
+            $table->string('code');
+            $table->string('description');
+            $table->string('add_description');
+            $table->float('unit_price');
+            $table->float('price_A');
+            $table->float('price_B');
             $table->timestamps();
         });
     }

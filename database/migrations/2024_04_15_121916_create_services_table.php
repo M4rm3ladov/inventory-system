@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('stock_count_periods', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('service_category_id');
+            $table->string('description');
+            $table->float('price_A');
+            $table->float('price_B');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_count_periods');
+        Schema::dropIfExists('services');
     }
 };
