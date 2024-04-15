@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_category_id');
+            $table->foreignId('service_category_id')->constrained();
             $table->string('description');
             $table->float('price_A');
             $table->float('price_B');

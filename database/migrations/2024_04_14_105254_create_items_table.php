@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brand_id');
-            $table->foreignId('unit_id');
-            $table->foreignId('item_category_id');
+            $table->foreignId('brand_id')->constrained();
+            $table->foreignId('unit_id')->constrained();
+            $table->foreignId('item_category_id')->constrained();
             $table->string('code');
             $table->string('description');
             $table->string('add_description');
