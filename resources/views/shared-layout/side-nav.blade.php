@@ -1,10 +1,10 @@
-<div class="bg-dark col-auto bg-dark min-vh-100">
-    <div class="mt-4">
+<div class="bg-dark col-12 col-sm-12 col-md-2 bg-dark min-vh-100">
+    <div class="mt-4 position-fixed">
         <a href="" class="fs-4 text-white text-decoration-none fw-bold" role="button">{{ config('app.title') }}</a>
         <hr class="text-white">
         <ul class="nav nav-pills flex-column mt-2" id="menu">
             <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="#">
+                <a href="{{ route('dashboard') }}" class="nav-link text-white" aria-current="page" href="#">
                     <i class="fa fa-gauge"></i>
                     <span class="ms-2">Dashboard</span>
                 </a>
@@ -18,25 +18,25 @@
                 </a>
                 <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="productmenu" data-bs-parent="#menu">
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" aria-current="page">
+                        <a href="{{ route('item') }}" class="nav-link text-white" aria-current="page">
                             <i class="fa fa-cart-shopping"></i>
                             <span class="ms-2">Item</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" aria-current="page">
+                        <a href="{{ route('item-category') }}" class="nav-link text-white" aria-current="page">
                             <i class="fa fa-network-wired"></i>
                             <span class="ms-2">Category</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" aria-current="page">
+                        <a href="{{ route('item-brand') }}" class="nav-link text-white" aria-current="page">
                             <i class="fa fa-tag"></i>
                             <span class="ms-2">Brand</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-white" aria-current="page">
+                        <a href="{{ route('item-unit') }}" class="nav-link text-white" aria-current="page">
                             <i class="fa fa-scale-balanced"></i>
                             <span class="ms-2">Unit</span>
                         </a>

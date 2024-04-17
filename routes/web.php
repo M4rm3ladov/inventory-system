@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemCategoryController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/item', [ItemController::class, 'index'])->name('item');
+
+Route::get('/item/unit', [UnitController::class, 'index'])->name('item-unit');
+
+Route::get('/item/brand', [BrandController::class, 'index'])->name('item-brand');
+
+Route::get('/item/category', [ItemCategoryController::class, 'index'])->name('item-category');

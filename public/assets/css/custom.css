@@ -11,3 +11,7 @@ a.logout:hover {
     background-color: #BB2D3B;
     color: #fff;
 }
+
+.content-container {
+    background-color: #F1F2F3;
+}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-dark d-flex justify-content-end">
+<nav class="navbar navbar-light bg-dark d-flex justify-content-end sticky-top">
     <div class="btn-group">
         <a class="btn border-none outline-none dropdown-toggle text-white" href="#" id="userdropdownMenuLink"
             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
