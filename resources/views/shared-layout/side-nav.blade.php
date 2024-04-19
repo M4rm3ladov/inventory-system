@@ -127,7 +127,7 @@
                 </ul>
             </li>
             <li class="nav-item text-white">
-                <a class="nav-link text-white" aria-current="page" href="#">
+                <a class="nav-link text-white" aria-current="page" href="{{ route('user') }}">
                     <i class="fa fa-id-card"></i>
                     <span class="ms-2">System Users</span>
                 </a>

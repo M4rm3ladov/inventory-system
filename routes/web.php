@@ -15,6 +15,7 @@ use App\Http\Controllers\StockReturnController;
 use App\Http\Controllers\StockTransferController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,3 +58,5 @@ Route::get('/stock-transfer', [StockTransferController::class, 'index'])->name('
 Route::get('/stock-out', [StockOutController::class, 'index'])->name('stock-out');
 
 Route::get('/stock-count', [StockCountController::class, 'index'])->name('stock-count');
+
+Route::get('/user', [UserController::class, 'index'])->name('user');
