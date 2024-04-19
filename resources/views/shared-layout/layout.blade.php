@@ -28,7 +28,7 @@
                 {{-- nav & current account  --}}
                 @include('shared-layout.nav')
                 {{-- content --}}
-                @if (Route::is('dashboard') || Route::is('stock-in'))
+                @if (Route::is(['dashboard', 'stock-in', 'stock-return', 'stock-out', 'stock-transfer', 'stock-count']))
                     @yield('content')
                 @else
                     <div class="container-fluid py-3">

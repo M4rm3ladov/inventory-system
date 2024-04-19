@@ -4,7 +4,7 @@
     <div class="container-fluid py-3">
         <div class="card h-80 w-100">
             <div class="card-body">
-                <h4 class="card-title">Stock In Products</h4>
+                <h4 class="card-title">Stock Adjust Products</h4>
                 {{-- action buttons --}}
                 <div class="mt-4 d-flex flex-row">
                     <div>
@@ -94,12 +94,12 @@
     <div id="history" class="container-fluid py-3">
         <div class="card" style="width: 100%">
             <div class="card-body">
-                <h4 class="card-title">Stock In History</h4>
+                <h4 class="card-title">Stock Adjust History</h4>
                 {{-- action buttons --}}
                 <div class="mt-4">
-                    <a type="button" class="btn btn-success" href="stock-in">
+                    <a type="button" class="btn btn-success" href="stock-count">
                         <i class="fa fa-add"></i>
-                        <span class="ms-1">Stock In Items</span>
+                        <span class="ms-1">Adjust Items</span>
                     </a>
                     @include('shared-layout.export-buttons')
                 </div>
@@ -124,6 +124,8 @@
                                 <th scope="col" data-sortable="true">ID</th>
                                 <th scope="col" data-sortable="true">Reference</th>
                                 <th scope="col" data-sortable="true" class="text-nowrap">Transaction Date</th>
+                                <th scope="col" data-sortable="true" class="text-nowrap">Period From</th>
+                                <th scope="col" data-sortable="true" class="text-nowrap">Period To</th>
                                 <th scope="col" data-sortable="true">Supplier</th>
                                 <th scope="col" data-sortable="true">Quantity</th>
                                 <th scope="col" data-sortable="true">Code</th>
@@ -139,7 +141,9 @@
                             <tr>
                                 <td scope="row">2</td>
                                 <td>2024123241</td>
-                                <td >11/11/11</td>
+                                <td>11/12/12</td>
+                                <td>11/12/12</td>
+                                <td>11/12/12</td>
                                 <td>Guiwan</td>
                                 <td class="text-center">50</td>
                                 <td>1c1dad</td>

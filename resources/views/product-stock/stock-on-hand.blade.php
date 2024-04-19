@@ -50,7 +50,6 @@
                     <th scope="col" data-sortable="true">Name</th>
                     <th scope="col" data-sortable="true">Description</th>
                     <th scope="col" data-sortable="true">Brand</th>
-                    <th scope="col">Image</th>
                     <th scope="col" data-sortable="true">Category</th>
                     <th scope="col" data-sortable="true">Unit</th>
                     <th scope="col" data-sortable="true">Action</th>
@@ -60,12 +59,11 @@
                 <tr>
                     <th scope="row">2</th>
                     <td>Guiwan</td>
-                    <td class="text-end">50</td>
+                    <td class="text-center">50</td>
                     <td>1c1dad</td>
                     <td>4KLm</td>
                     <td>205</td>
                     <td>GoodYear</td>
-                    <td><img src="" alt="no img"></td>
                     <td>Tire</td>
                     <td>pieces</td>
                     <td class="text-nowrap">
