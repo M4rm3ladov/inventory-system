@@ -2,7 +2,7 @@
 {{-- dashboard cards --}}
 @section('content')
     <div class="container-fluid pt-3">
-        <div class="row row-cols-1 row-cols-md-5 g-3">
+        <div class="row row-cols-sm-1 row-cols-md-5 g-3">
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">

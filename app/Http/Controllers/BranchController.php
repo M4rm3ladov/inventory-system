@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class BranchController extends Controller
 {
     public function index() {
-        return view('service.item');
+        return view('branch.branch');
     }
 }

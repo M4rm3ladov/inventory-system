@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('service_category_id')->constrained();
-            $table->string('code');
-            $table->string('description');
-            $table->float('price_A');
-            $table->float('price_B');
-            $table->timestamps();
+        Schema::table('suppliers', function (Blueprint $table) {
+            $table->string('email')->default('none')->after('address');
+            $table->string('phone')->default('none')->after('email');
         });
     }
 
@@ -31,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::table('suppliers', function (Blueprint $table) {
+            //
+        });
     }
 };

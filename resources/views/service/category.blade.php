@@ -1,12 +1,12 @@
 @extends('shared-layout.layout')
 {{-- item unit of measurement --}}
 @section('content')
-    <h4 class="card-title">List of Units of Measurement</h4>
+    <h4 class="card-title">List of Service Categories</h4>
     {{-- action buttons --}}
     <div class="mt-4">
         <button type="button" class="btn btn-success">
             <i class="fa fa-add"></i>
-            <span class="ms-1">Add a New Unit</span>
+            <span class="ms-1">Add a New Category</span>
         </button>
         @include('shared-layout.export-buttons')
     </div>
@@ -51,6 +51,7 @@
                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
                     </td>
                 </tr>
+
                 <tr>
                     <th scope="row">2</th>
                     <td>Jacob</td>
