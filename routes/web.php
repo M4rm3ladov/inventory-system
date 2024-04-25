@@ -45,6 +45,8 @@ Route::get('/service/category', [ServiceCategoryController::class, 'index'])->na
 
 Route::get('/branch', [BranchController::class, 'index'])->name('branch');
 
+Route::post('/branch/create', [BranchController::class, 'store'])->name('branch.create');
+
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
 
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');

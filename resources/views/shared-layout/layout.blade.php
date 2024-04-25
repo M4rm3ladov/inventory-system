@@ -20,7 +20,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row vh-100">
             {{-- side navigation --}}
             @include('shared-layout.side-nav')
             {{-- content column --}}
@@ -28,7 +28,7 @@
                 {{-- nav & current account  --}}
                 @include('shared-layout.nav')
                 {{-- content --}}
-                @if (Route::is(['dashboard', 'stock-in', 'stock-return', 'stock-out', 'stock-transfer', 'stock-count']))
+                @if (Route::is('dashboard'))
                     @yield('content')
                 @else
                     <div class="container-fluid py-3">
@@ -46,6 +46,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    {{-- alpine js --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.9/dist/cdn.min.js"></script>
     {{-- datepicker --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>

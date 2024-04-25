@@ -1,9 +1,8 @@
-<div class="bg-dark col-12 col-sm-12 col-md-2 bg-dark min-vh-100">
-    <div class="mt-4 position-fixed">
+<div class="bg-dark col-12 col-sm-12 col-md-2 bg-dark">
+    <div class="mt-4 position-fixed" style="width: 15%">
         <a href="" class="text-center text-white text-decoration-none" role="button">
-            <h1 class="fs-4 fw-bold">{{ config('app.title') }}</h1>
+            <h1 class="fs-5 fw-bold">{{ config('app.title') }}</h1>
         </a>
-        <hr class="text-white">
         <ul class="nav nav-pills flex-column mt-2" id="menu">
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link text-white" aria-current="page" href="#">
