@@ -24,10 +24,12 @@ class CreateBranch extends Component
     public function store() {
         $this->formTitle = 'Edit Branch';
         $this->form->store();
+        $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
     public function update() {
         $this->form->update();
+        $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
     #[On('branch-edit')]

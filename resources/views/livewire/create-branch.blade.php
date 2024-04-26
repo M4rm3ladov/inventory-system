@@ -1,7 +1,7 @@
 <div>
     @if ($isOpen)
         <div wire:ignore.self class="modal show" id="branchModal" tabindex="-1" aria-labelledby="branchModalLabel"
-            aria-hidden="true" style="display: block">
+            aria-hidden="true" style="display: block;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -48,7 +48,7 @@
                         <div class="modal-footer">
                             <button wire:click="close" type="button" class="btn btn-danger"
                                 data-bs-dismiss="modal">Cancel</button>
-                            <button wire:click.prevent wire:click="{{ $isEditing ? 'update' : 'save' }}" class="btn btn-success">
+                            <button wire:click.prevent wire:click="{{ $isEditing ? 'update' : 'update' }}" class="btn btn-success">
                                 {{ $isEditing ? 'Update' : 'Save' }}
                             </button>
                         </div>

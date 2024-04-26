@@ -2,10 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Exports\BranchesExport;
 use App\Models\Branch;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 #[Lazy]
 class AllBranches extends Component
@@ -30,6 +34,7 @@ class AllBranches extends Component
         HTML;
     }
 
+    #[On('refresh-branch')]
     public function render()
     {
         $branches = Branch::query();
@@ -44,10 +49,35 @@ class AllBranches extends Component
                 ->paginate($this->pagination);
         }
 
-        sleep(5);
         return view('livewire.all-branches', [
             'branches' => $branches,
         ]);
+    }
+
+    public function exportPdf() {
+        if (!$this->searchQuery) {
+            $branches = Branch::query()
+                ->get()
+                ->toArray();
+        } else {
+            $branches = Branch::query()->where('name', 'like', '%' . $this->searchQuery . '%')
+                ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
+                ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
+                ->orWhere('phone', 'like', '%' . $this->searchQuery . '%')
+                ->get()
+                ->toArray();    
+        }
+
+        $pdf = Pdf::loadView('branch.branches-pdf', ['branches' => $branches]);
+
+        return response()->streamDownload(function() use($pdf) {
+            echo $pdf->stream();
+        }, 'branches.pdf');
+    }
+
+    public function exportExcel() {
+        return (new BranchesExport($this->searchQuery))
+            ->download('branches.xls');
     }
 
     public function updatedSearchQuery() {
