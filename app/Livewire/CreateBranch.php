@@ -61,6 +61,7 @@ class CreateBranch extends Component
         $this->form->resetInputs();
     }
 
+    #[On('reset-modal')]
     public function close() {
         $this->resetInputs();
         $this->isEditing = false;

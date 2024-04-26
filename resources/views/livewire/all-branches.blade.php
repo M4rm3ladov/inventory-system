@@ -36,7 +36,7 @@
                             <button wire:click="$dispatch('branch-edit', {id:{{ $branch->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#addBranchModal"><i class="fa fa-pen-to-square me-1"></i>Edit</button>
-                            <button type="button" wire:click="$dispatch('delete-prompt')"
+                            <button type="button" wire:click="$dispatch('delete-prompt', {name:'{{ $branch->name }}'})"
                                 class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
                         </td>
                     </tr>
@@ -48,10 +48,10 @@
 </div>
 @script
     <script>
-        $wire.on('delete-prompt', () => {
+        $wire.on('delete-prompt', (event) => {
             swal.fire({
                 title: 'Are you sure?',
-                text: "You're about to delete this record permanently",
+                html: "You're about to delete <strong>" + event.name + "</strong>. This action is permanent!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#C82333',
@@ -62,6 +62,11 @@
                     $wire.dispatch('branch-delete')
                 }
             })
+        })
+
+        var modal = document.getElementById('addBranchModal')
+        modal.addEventListener('hidden.bs.modal', (event) => {
+            $wire.dispatch('reset-modal')
         })
     </script>
 @endscript

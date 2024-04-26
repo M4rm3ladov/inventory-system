@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="addBranchModalLabel">{{ $isEditing ? 'Edit Branch' : 'Add Branch' }}</h1>
-                <button wire:click="close" type="button" class="btn-close" data-bs-dismiss="modal"
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
             @include('shared-layout.success-message')
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" wire:click="close" type="button" class="btn btn-danger"
+                    <button type="button" type="button" class="btn btn-danger"
                         data-bs-dismiss="modal">Cancel</button>
                     <button type="button" wire:click="{{ $isEditing ? 'update' : 'store' }}" class="btn btn-success">
                         {{ $isEditing ? 'Update' : 'Save' }}
