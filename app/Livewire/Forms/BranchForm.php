@@ -50,4 +50,9 @@ class BranchForm extends Form
         
         $this->resetValidation();
     }
+
+    public function resetInputs() {
+        $this->reset(['name', 'address', 'email', 'phone']);
+        $this->resetValidation();
+    }
 }

@@ -1,7 +1,7 @@
 <div>
     {{-- action buttons --}}
     <div class="mt-4">
-        <button @click="$dispatch('branch-create')" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#branchModal">
+        <button data-bs-target="#addBranchModal" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#branchModal">
             <i class="fa fa-add"></i>
             <span class="ms-1">Add a New Branch</span>
         </button>
@@ -33,7 +33,7 @@
                         <td>{{ $branch->phone }}</td>
                         <td class="text-nowrap">
                             <button @click="$dispatch('branch-edit', {id:{{ $branch->id }}})" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#branchModal"><i class="fa fa-pen-to-square me-1"></i>Edit</button>
+                                data-bs-target="#addBranchModal"><i class="fa fa-pen-to-square me-1"></i>Edit</button>
                             <button class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
                         </td>
                     </tr>
