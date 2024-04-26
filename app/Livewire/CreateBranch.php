@@ -53,8 +53,12 @@ class CreateBranch extends Component
     }
 
     #[On('branch-delete')]
-    public function delete() {
+    public function delete($id) {
+        $branch = Branch::findOrfail($id);
+        $branch->delete();
+        
         $this->dispatch('branch-deleted');
+        $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
     public function resetInputs() {
