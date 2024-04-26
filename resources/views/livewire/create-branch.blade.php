@@ -56,24 +56,29 @@
 </div>
 @script
     <script>
-        // document.addEventListener('livewire:initialized', () => {
-        //     @this.on('success-alert', (event) => {
-        //         const data = event
-        //         swal.fire({
-        //             icon:data[0]['icon'],
-        //             title:data[0]['title'],
-        //             text:data[0]['text'],
-        //         })
-        //     })
-        // })
-
-        $wire.on('success-alert', (event) => {
+        $wire.on('branch-created', (event) => {
             const data = event
             swal.fire({
                 icon: data[0]['icon'],
                 title: data[0]['title'],
                 text: data[0]['text'],
+                timer: 1500,
+                showConfirmButton: false,
             })
+        })
+
+        $wire.on('branch-deleted', () => {
+            swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Branch deleted successfully!',
+                timer: 1500,
+                showConfirmButton: false,
+            })
+        })
+
+        $wire.on('branch-updated', () => {
+            $('#addBranchModal').modal('hide')
         })
     </script>
 @endscript

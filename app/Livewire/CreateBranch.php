@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\BranchForm;
+use App\Models\Branch;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -12,17 +13,35 @@ class CreateBranch extends Component
     public $isEditing = false;
 
     public function store() {
-        $this->dispatch('success-alert', [
+        $this->validate();
+        Branch::create($this->form->all());
+
+        $this->dispatch('branch-created', [
             'title' => 'Success!',
-            'text' => 'Data saved successfully!',
+            'text' => 'Branch saved successfully!',
             'icon' => 'success',
         ]);
-        // $this->form->store();
-        // $this->dispatch('refresh-branch')->to(AllBranches::class);
+
+        $this->resetInputs();
+        //return $this->redirect('/branches');
+        $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
     public function update() {
-        $this->form->update();
+        $this->validate();
+        $this->form->branch->update(
+            $this->form->all()
+        );
+
+        $this->dispatch('branch-created', [
+            'title' => 'Success!',
+            'text' => 'Branch saved successfully!',
+            'icon' => 'success',
+        ]);
+
+        $this->close();
+
+        $this->dispatch('branch-updated');
         $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
@@ -33,8 +52,9 @@ class CreateBranch extends Component
         $this->form->setBranch($id);
     }
 
+    #[On('branch-delete')]
     public function delete() {
-        dump('here');
+        $this->dispatch('branch-deleted');
     }
 
     public function resetInputs() {

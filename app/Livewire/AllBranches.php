@@ -9,7 +9,6 @@ use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 
 #[Lazy]
 class AllBranches extends Component
@@ -18,7 +17,8 @@ class AllBranches extends Component
     public $searchQuery = '';
     public $pagination = 10;
 
-    public function placeholder() {
+    public function placeholder()
+    {
         return <<<'HTML'
             <div>
                 <div>
@@ -40,12 +40,15 @@ class AllBranches extends Component
         $branches = Branch::query();
 
         if (!$this->searchQuery) {
-            $branches = $branches->paginate($this->pagination);
+            $branches = $branches
+                ->orderBy('created_at', 'DESC')
+                ->paginate($this->pagination);
         } else {
             $branches = $branches->where('name', 'like', '%' . $this->searchQuery . '%')
                 ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
                 ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
                 ->orWhere('phone', 'like', '%' . $this->searchQuery . '%')
+                ->orderBy('created_at', 'DESC')
                 ->paginate($this->pagination);
         }
 
@@ -54,9 +57,11 @@ class AllBranches extends Component
         ]);
     }
 
-    public function exportPdf() {
+    public function exportPdf()
+    {
         if (!$this->searchQuery) {
             $branches = Branch::query()
+                ->orderBy('created_at', 'DESC')
                 ->get()
                 ->toArray();
         } else {
@@ -64,23 +69,26 @@ class AllBranches extends Component
                 ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
                 ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
                 ->orWhere('phone', 'like', '%' . $this->searchQuery . '%')
+                ->orderBy('created_at', 'DESC')
                 ->get()
-                ->toArray();    
+                ->toArray();
         }
 
         $pdf = Pdf::loadView('branch.branches-pdf', ['branches' => $branches]);
 
-        return response()->streamDownload(function() use($pdf) {
+        return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'branches.pdf');
     }
 
-    public function exportExcel() {
+    public function exportExcel()
+    {
         return (new BranchesExport($this->searchQuery))
             ->download('branches.xls');
     }
 
-    public function updatedSearchQuery() {
+    public function updatedSearchQuery()
+    {
         $this->resetPage();
     }
 }

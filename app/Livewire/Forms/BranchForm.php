@@ -3,24 +3,43 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Branch;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class BranchForm extends Form
 {
-    public Branch $branch;
+    public ?Branch $branch;
 
-    #[Validate('required|min:3|unique:branches')]
-    public $name;
+    public $name = '';
 
-    #[Validate('required|min:3|unique:branches')]
-    public $address;
+    public $address = '';
 
-    #[Validate('required|email|unique:branches')]
-    public $email;
+    public $email = '';
 
-    #[Validate('required|max:15|unique:branches')]
-    public $phone;
+    public $phone = '';
+
+    public function rules()
+    {
+        return [
+            'name' => [
+                'required', 'min:3',
+                Rule::unique('branches')->ignore($this->branch->id),
+            ],
+            'address' => [
+                'required', 'min:3',
+                Rule::unique('branches')->ignore($this->branch->id),
+            ],
+            'email' => [
+                'required', 'email',
+                Rule::unique('branches')->ignore($this->branch->id),
+            ],
+            'phone' => [
+                'required', 'max:15',
+                Rule::unique('branches')->ignore($this->branch->id),
+            ],
+        ];
+    }
 
     public function setBranch($id)
     {
@@ -32,26 +51,8 @@ class BranchForm extends Form
         $this->phone = $this->branch->phone;
     }
 
-    public function store() 
+    public function resetInputs()
     {
-        $this->validate();
-        Branch::create($this->all());
-        session()->flash('success', 'Branch has been created!');
-        
-        $this->resetValidation();
-    }
-
-    public function update()
-    {
-        $this->branch->update(
-            $this->all()
-        );
-        session()->flash('success', 'Branch has been updated!');
-        
-        $this->resetValidation();
-    }
-
-    public function resetInputs() {
         $this->reset(['name', 'address', 'email', 'phone']);
         $this->resetValidation();
     }

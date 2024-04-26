@@ -30,14 +30,14 @@
                         <th scope="row">{{ $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $branch->name }}</td>
                         <td>{{ $branch->address }}</td>
-                        <td>{{ $branch->email }}</td>
-                        <td>{{ $branch->phone }}</td>
+                        <td class="text-nowrap">{{ $branch->email }}</td>
+                        <td class="text-nowrap">{{ $branch->phone }}</td>
                         <td class="text-nowrap">
                             <button wire:click="$dispatch('branch-edit', {id:{{ $branch->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#addBranchModal"><i class="fa fa-pen-to-square me-1"></i>Edit</button>
-                            <button type="button" wire:click="$dispatch('delete-prompt')" class="btn btn-sm btn-danger"><i
-                                    class="fa fa-trash me-1"></i>Delete</button>
+                            <button type="button" wire:click="$dispatch('delete-prompt')"
+                                class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -47,17 +47,21 @@
     {{ $branches->links() }}
 </div>
 @script
-<script>
-    $wire.on('delete-prompt', () => {
-        swal.fire({
-            title: 'Are you sure?',
-            text: "You're about to delete this record",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#C82333',
-            cancelButtonColor: '#5A6268',
-            confirmButtonText: 'Delete record'
+    <script>
+        $wire.on('delete-prompt', () => {
+            swal.fire({
+                title: 'Are you sure?',
+                text: "You're about to delete this record permanently",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#C82333',
+                cancelButtonColor: '#5A6268',
+                confirmButtonText: 'Delete record'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('branch-delete')
+                }
+            })
         })
-    })
-</script>
+    </script>
 @endscript
