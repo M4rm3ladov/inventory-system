@@ -9,20 +9,16 @@ use Livewire\Component;
 class CreateBranch extends Component
 {
     public BranchForm $form;
-    public $isOpen = false;
     public $isEditing = false;
 
-    // #[On('branch-create')]
-    // public function create() {
-    //     $this->isEditing = false;
-    //     $this->resetInputs();
-    //     $this->openModal();
-    //     $this->formTitle = 'Add Branch';
-    // }
-
     public function store() {
-        $this->form->store();
-        $this->dispatch('refresh-branch')->to(AllBranches::class);
+        $this->dispatch('success-alert', [
+            'title' => 'Success!',
+            'text' => 'Data saved successfully!',
+            'icon' => 'success',
+        ]);
+        // $this->form->store();
+        // $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 
     public function update() {
@@ -35,7 +31,10 @@ class CreateBranch extends Component
     {
         $this->isEditing = true;
         $this->form->setBranch($id);
-        $this->openModal();
+    }
+
+    public function delete() {
+        dump('here');
     }
 
     public function resetInputs() {
@@ -45,17 +44,6 @@ class CreateBranch extends Component
     public function close() {
         $this->resetInputs();
         $this->isEditing = false;
-        $this->closeModal();
-    }
-
-    public function openModal()
-    {
-        $this->isOpen = true;
-    }
-
-    public function closeModal()
-    {
-        $this->isOpen = false;
     }
 
     public function render()

@@ -1,9 +1,11 @@
-<div wire:ignore.self class="modal fade" id="addBranchModal" tabindex="-1" aria-labelledby="addBranchModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="addBranchModal" tabindex="-1" aria-labelledby="addBranchModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="addBranchModalLabel">{{ $isEditing ? 'Edit Branch' : 'Add Branch' }}</h1>
-                <button wire:click="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button wire:click="close" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             @include('shared-layout.success-message')
             <form>
@@ -42,12 +44,36 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button wire:click="close" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button wire:click.prevent wire:click="{{ $isEditing ? 'update' : 'store'}}" class="btn btn-success">
-                        {{ $isEditing ? 'Update' : 'Save'}} 
-                    </button>                   
+                    <button type="button" wire:click="close" type="button" class="btn btn-danger"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" wire:click="{{ $isEditing ? 'update' : 'store' }}" class="btn btn-success">
+                        {{ $isEditing ? 'Update' : 'Save' }}
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+@script
+    <script>
+        // document.addEventListener('livewire:initialized', () => {
+        //     @this.on('success-alert', (event) => {
+        //         const data = event
+        //         swal.fire({
+        //             icon:data[0]['icon'],
+        //             title:data[0]['title'],
+        //             text:data[0]['text'],
+        //         })
+        //     })
+        // })
+
+        $wire.on('success-alert', (event) => {
+            const data = event
+            swal.fire({
+                icon: data[0]['icon'],
+                title: data[0]['title'],
+                text: data[0]['text'],
+            })
+        })
+    </script>
+@endscript
