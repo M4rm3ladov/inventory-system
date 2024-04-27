@@ -21,6 +21,9 @@ class AllBranches extends Component
     {
         return <<<'HTML'
             <div>
+                <div class="placeholder-glow mb-2">
+                    <div class="placeholder placeholder-lg col-2"></div>
+                </div>
                 <div>
                     <button class="btn btn-primary disabled placeholder col-2 mr-2">
                     <button class="btn btn-primary disabled placeholder col-2 mr-2">

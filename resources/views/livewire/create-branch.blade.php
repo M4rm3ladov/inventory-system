@@ -1,9 +1,9 @@
-<div wire:ignore.self class="modal fade" id="addBranchModal" tabindex="-1" aria-labelledby="addBranchModalLabel"
+<div wire:ignore.self class="modal fade" id="branchModal" tabindex="-1" aria-labelledby="branchModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addBranchModalLabel">{{ $isEditing ? 'Edit Branch' : 'Add Branch' }}</h1>
+                <h1 class="modal-title fs-5" id="branchModalLabel">{{ $isEditing ? 'Edit Branch' : 'Add Branch' }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
@@ -77,7 +77,7 @@
         })
 
         $wire.on('branch-updated', () => {
-            $('#addBranchModal').modal('hide')
+            $('#branchModal').modal('hide')
         })
     </script>
 @endscript
