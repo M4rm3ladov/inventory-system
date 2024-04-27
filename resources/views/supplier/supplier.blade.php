@@ -1,5 +1,5 @@
 @extends('shared-layout.layout')
 
 @section('content')
-    <livewire:all-branches lazy="true">
+    <livewire:all-suppliers lazy="true">
 @endsection

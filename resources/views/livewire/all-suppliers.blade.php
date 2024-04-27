@@ -2,25 +2,21 @@
     <h4 class="card-title">List of Suppliers</h4>
     {{-- action buttons --}}
     <div class="mt-4">
-        <button data-bs-target="#addSupplierModal" type="button" class="btn btn-success" data-bs-toggle="modal"
-            data-bs-target="#branchModal">
+        <button data-bs-target="#supplierModal" type="button" class="btn btn-success" data-bs-toggle="modal">
             <i class="fa fa-add"></i>
             <span class="ms-1">Add a New Supplier</span>
         </button>
         @include('shared-layout.export-buttons')
     </div>
     {{-- table filter --}}
-    <form action="" method="" class="d-flex flex-row justify-content-between mt-3">
-        @include('shared-layout.entries')
-        @include('shared-layout.search')
-    </form>
+    @include('shared-layout.search')
     {{-- content table --}}
-    <div class="table-scroll-x table-responsive overflow-scroll mt-3" style="height: 320px;">
+    <div class="table-scroll-x table-responsive overflow-scroll mt-3" style="height: 500px;">
         <table class="table-hover table table-striped table-bordered" data-toggle="table" data-search="true"
             data-show-columns="true">
             <thead class="sticky-top top-0">
                 <tr>
-                    <th scope="col" data-sortable="true">ID</th>
+                    <th scope="col" data-sortable="true">#</th>
                     <th scope="col" data-sortable="true">Name</th>
                     <th scope="col" data-sortable="true">Address</th>
                     <th scope="col">Email</th>

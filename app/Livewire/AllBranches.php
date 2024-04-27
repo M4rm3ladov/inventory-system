@@ -16,6 +16,8 @@ class AllBranches extends Component
     use WithPagination;
     public $searchQuery = '';
     public $pagination = 10;
+    public $sortBy = 'created_at';
+    public $sortDirection = 'DESC';
 
     public function placeholder()
     {
@@ -37,23 +39,22 @@ class AllBranches extends Component
         HTML;
     }
 
+    public function setSortBy($sortByField) {
+        if ($this->sortBy === $sortByField) {
+            $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
+            return;
+        }
+
+        $this->sortBy = $sortByField;
+        $this->sortDirection = 'DESC';
+    }
+
     #[On('refresh-branch')]
     public function render()
     {
-        $branches = Branch::query();
-
-        if (!$this->searchQuery) {
-            $branches = $branches
-                ->orderBy('created_at', 'DESC')
+        $branches = Branch::search($this->searchQuery)
+                ->orderBy($this->sortBy, $this->sortDirection)
                 ->paginate($this->pagination);
-        } else {
-            $branches = $branches->where('name', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('phone', 'like', '%' . $this->searchQuery . '%')
-                ->orderBy('created_at', 'DESC')
-                ->paginate($this->pagination);
-        }
 
         return view('livewire.all-branches', [
             'branches' => $branches,
@@ -62,20 +63,10 @@ class AllBranches extends Component
 
     public function exportPdf()
     {
-        if (!$this->searchQuery) {
-            $branches = Branch::query()
-                ->orderBy('created_at', 'DESC')
+        $branches = Branch::search($this->searchQuery)
+                ->orderBy($this->sortBy, $this->sortDirection)
                 ->get()
                 ->toArray();
-        } else {
-            $branches = Branch::query()->where('name', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
-                ->orWhere('phone', 'like', '%' . $this->searchQuery . '%')
-                ->orderBy('created_at', 'DESC')
-                ->get()
-                ->toArray();
-        }
 
         $pdf = Pdf::loadView('branch.branches-pdf', ['branches' => $branches]);
 

@@ -14,6 +14,6 @@
     </div>
     <div class="d-flex flex-row">
         <label class="my-auto me-2">Search:</label>
-        <input wire:model.live="searchQuery" type="text" class="form-control">
+        <input wire:model.live.debounce.300ms="searchQuery" type="text" class="form-control">
     </div>
 </form>

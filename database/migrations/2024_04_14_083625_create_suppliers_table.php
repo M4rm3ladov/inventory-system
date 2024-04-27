@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
+            $table->string('email')->default('none');
+            $table->string('phone')->default('none');
             $table->timestamps();
         });
     }
