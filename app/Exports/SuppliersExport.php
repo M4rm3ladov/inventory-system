@@ -62,10 +62,6 @@ class SuppliersExport implements FromQuery, WithMapping, WithHeadings, WithStyle
 
     public function query()
     {
-        return Supplier::query()
-            ->where('name', 'like', '%' . $this->searchQuery . '%')
-            ->orWhere('address', 'like', '%' . $this->searchQuery . '%')
-            ->orWhere('email', 'like', '%' . $this->searchQuery . '%')
-            ->orWhere('phone', 'like', '%' . $this->searchQuery . '%');
+        return Supplier::search($this->searchQuery);
     }
 }

@@ -2,17 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\Branch;
+use App\Models\ServiceCategory;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class BranchesExport implements FromQuery, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
+class ServiceCategoriesExport implements FromQuery, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
 {
     use Exportable;
     protected $searchQuery;
@@ -29,24 +28,13 @@ class BranchesExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             1  => [
                 'font' => ['bold' => true],
             ],
-
-            'D' => [
-                'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
-            ],
-
-            'B' => [
-                'alignment' => ['wrapText' => true],
-            ]
         ];
     }
 
-    public function map($branch): array
+    public function map($serviceCategory): array
     {
         return [
-            $branch->name,
-            $branch->address,
-            $branch->email,
-            $branch->phone
+            $serviceCategory->name,
         ];
     }
 
@@ -54,14 +42,11 @@ class BranchesExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     {
         return [
             'Name',
-            'Address',
-            'Email',
-            'Phone'
         ];
     }
 
     public function query()
     {
-        return Branch::search($this->searchQuery);
+        return ServiceCategory::search($this->searchQuery);
     }
 }
