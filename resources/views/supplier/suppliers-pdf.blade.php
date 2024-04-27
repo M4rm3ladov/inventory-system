@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Branches</title>
+    <title>Suppliers</title>
 </head>
 <body>
-    <h1>Branch Details</h1>
+    <h1>Supplier Details</h1>
     <table class="table-hover table table-striped table-bordered" data-toggle="table" data-search="true"
             data-show-columns="true">
             <thead class="sticky-top top-0 z-0">
@@ -20,13 +20,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($branches as $branch)
+                @foreach ($suppliers as $supplier)
                     <tr>
                         <th scope="row">{{ $loop->index + 1 }}</th>
-                        <td class="text-nowrap">{{ $branch['name'] }}</td>
-                        <td>{{ $branch['address'] }}</td>
-                        <td>{{ $branch['email'] }}</td>
-                        <td>{{ $branch['phone'] }}</td>
+                        <td class="text-nowrap">{{ $supplier['name'] }}</td>
+                        <td>{{ $supplier['address'] }}</td>
+                        <td>{{ $supplier['email'] }}</td>
+                        <td>{{ $supplier['phone'] }}</td>
                     </tr>
                 @endforeach
             </tbody>

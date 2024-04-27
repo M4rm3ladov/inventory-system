@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Exports\SuppliersExport;
 use App\Models\Supplier;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Lazy;
