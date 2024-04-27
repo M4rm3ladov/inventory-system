@@ -53,3 +53,31 @@
         </div>
     </div>
 </div>
+@script
+    <script>
+        $wire.on('supplier-created', (event) => {
+            const data = event
+            swal.fire({
+                icon: data[0]['icon'],
+                title: data[0]['title'],
+                text: data[0]['text'],
+                timer: 1500,
+                showConfirmButton: false,
+            })
+        })
+
+        $wire.on('supplier-deleted', () => {
+            swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Supplier deleted successfully!',
+                timer: 1500,
+                showConfirmButton: false,
+            })
+        })
+
+        $wire.on('supplier-updated', () => {
+            $('#supplierModal').modal('hide')
+        })
+    </script>
+@endscript

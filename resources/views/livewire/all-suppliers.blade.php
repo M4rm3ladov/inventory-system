@@ -54,7 +54,8 @@
             <tbody>
                 @foreach ($suppliers as $supplier)
                     <tr>
-                        <th scope="row">{{ ($suppliers ->currentpage() - 1) * $suppliers->perpage() + $loop->index + 1 }}</th>
+                        <th scope="row">
+                            {{ ($suppliers->currentpage() - 1) * $suppliers->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $supplier->name }}</td>
                         <td>{{ $supplier->address }}</td>
                         <td class="text-nowrap">{{ $supplier->email }}</td>
@@ -63,7 +64,8 @@
                             <button wire:click="$dispatch('supplier-edit', {id:{{ $supplier->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#supplierModal"><i
                                     class="fa fa-pen-to-square me-1"></i>Edit</button>
-                            <button type="button" wire:click="$dispatch('delete-prompt', {supplier:{{ $supplier }}})"
+                            <button type="button"
+                                wire:click="$dispatch('delete-prompt', {supplier:{{ $supplier }}})"
                                 class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
                         </td>
                     </tr>
@@ -73,3 +75,30 @@
     </div>
     {{ $suppliers->links() }}
 </div>
+@script
+    <script>
+        $wire.on('delete-prompt', (event) => {
+            swal.fire({
+                title: 'Are you sure?',
+                html: "You're about to delete <strong>" + event.supplier.name +
+                    "</strong>. This action is permanent!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#C82333',
+                cancelButtonColor: '#5A6268',
+                confirmButtonText: 'Delete record'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('supplier-delete', {
+                        id: event.supplier.id
+                    })
+                }
+            })
+        })
+
+        var modal = document.getElementById('supplierModal')
+        modal.addEventListener('hidden.bs.modal', (event) => {
+            $wire.dispatch('reset-modal')
+        })
+    </script>
+@endscript
