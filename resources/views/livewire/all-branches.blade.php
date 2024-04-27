@@ -54,7 +54,7 @@
             <tbody>
                 @foreach ($branches as $branch)
                     <tr>
-                        <th scope="row">{{ $loop->index + 1 }}</th>
+                        <th scope="row">{{ ($branches ->currentpage() - 1) * $branches->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $branch->name }}</td>
                         <td>{{ $branch->address }}</td>
                         <td class="text-nowrap">{{ $branch->email }}</td>
