@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\ServiceCategory;
+use App\Models\Unit;
 use Illuminate\Validation\Rule;
 use Livewire\Form;
 
-class ServiceCategoryForm extends Form
+class UnitForm extends Form
 {
-    public ?ServiceCategory $serviceCategory;
+    public Unit $unit;
     public $isEditing = false;
 
     public $name = '';
@@ -18,23 +18,23 @@ class ServiceCategoryForm extends Form
         if (!$this->isEditing) {
             return [
                 'name' => [
-                    'required', 'min:3', 'unique:service_categories'
+                    'required', 'min:3', 'unique:units'
                 ]
             ];
         }
         return [
             'name' => [
                 'required', 'min:3',
-                Rule::unique('service_categories')->ignore($this->serviceCategory->id),
+                Rule::unique('units')->ignore($this->unit->id),
             ],
         ];
     }
 
-    public function setServiceCategory($id)
+    public function setUnit($id)
     {
-        $this->serviceCategory = ServiceCategory::findOrfail($id);
+        $this->unit = Unit::findOrfail($id);
 
-        $this->name = $this->serviceCategory->name;
+        $this->name = $this->unit->name;
     }
 
     public function resetInputs()
