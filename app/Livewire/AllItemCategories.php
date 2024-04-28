@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Exports\UnitsExport;
-use App\Models\Unit;
+use App\Exports\ItemCategoriesExport;
+use App\Models\ItemCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Lazy()]
-class AllUnits extends Component
+class AllItemCategories extends Component
 {
     use WithPagination;
     public $searchQuery = '';
@@ -49,36 +49,36 @@ class AllUnits extends Component
         $this->sortDirection = 'DESC';
     }
 
-    #[On('refresh-unit')]
+    #[On('refresh-item-category')]
     public function render()
     {
-        $units = Unit::search($this->searchQuery)
+        $itemCategories = ItemCategory::search($this->searchQuery)
                 ->orderBy($this->sortBy, $this->sortDirection)
                 ->paginate($this->pagination);
 
-        return view('livewire.all-units', [
-            'units' => $units,
+        return view('livewire.all-item-categories', [
+            'itemCategories' => $itemCategories,
         ]);
     }
 
     public function exportPdf()
     {
-        $units = Unit::search($this->searchQuery)
+        $itemCategories = ItemCategory::search($this->searchQuery)
                 ->orderBy($this->sortBy, $this->sortDirection)
                 ->get()
                 ->toArray();
 
-        $pdf = Pdf::loadView('product.units-pdf', ['units' => $units]);
+        $pdf = Pdf::loadView('product.item-categories-pdf', ['itemCategories' => $itemCategories]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'product-units.pdf');
+        }, 'itemCategories.pdf');
     }
 
     public function exportExcel()
     {
-        return (new UnitsExport($this->searchQuery))
-            ->download('product-units.xls');
+        return (new ItemCategoriesExport($this->searchQuery))
+            ->download('item-categories.xls');
     }
 
     public function updatedSearchQuery()

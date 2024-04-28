@@ -67,7 +67,7 @@ class CreateServiceCategory extends Component
     #[On('reset-modal')]
     public function close() {
         $this->resetInputs();
-        $this->isEditing = false;
+        $this->form->isEditing = $this->isEditing = false;
     }
 
     public function render()

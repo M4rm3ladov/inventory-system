@@ -5,10 +5,12 @@ namespace App\Livewire;
 use App\Exports\BrandsExport;
 use App\Models\Brand;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Lazy()]
 class AllBrands extends Component
 {
     use WithPagination;
