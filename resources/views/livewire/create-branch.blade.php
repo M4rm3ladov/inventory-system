@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" type="button" class="btn btn-danger"
+                    <button type="button" class="btn btn-danger"
                         data-bs-dismiss="modal">Cancel</button>
                     <button type="button" wire:click="{{ $isEditing ? 'update' : 'store' }}" class="btn btn-success">
                         {{ $isEditing ? 'Update' : 'Save' }}

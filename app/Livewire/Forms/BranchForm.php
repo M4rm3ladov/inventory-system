@@ -4,7 +4,6 @@ namespace App\Livewire\Forms;
 
 use App\Models\Branch;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class BranchForm extends Form
@@ -39,6 +38,10 @@ class BranchForm extends Form
                 Rule::unique('branches')->ignore($this->branch->id),
             ],
         ];
+    }
+
+    public function mount() {
+        $this->branch = new Branch();
     }
 
     public function setBranch($id)

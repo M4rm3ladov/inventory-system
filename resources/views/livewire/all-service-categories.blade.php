@@ -2,7 +2,7 @@
     <h4 class="card-title">List of Service Categories</h4>
     {{-- action buttons --}}
     <div class="mt-4">
-        <button type="button" class="btn btn-success">
+        <button wire:click="$dispatch('service-category-create')" data-bs-target="#serviceCategoryModal" type="button" class="btn btn-success" data-bs-toggle="modal">
             <i class="fa fa-add"></i>
             <span class="ms-1">Add a New Service Category</span>
         </button>
@@ -16,7 +16,7 @@
             data-show-columns="true">
             <thead class="sticky-top top-0">
                 <tr>
-                    <th scope="col" data-sortable="true">ID</th>
+                    <th scope="col" data-sortable="true">#</th>
                     <th scope="col" data-sortable="true" wire:click="setSortBy('name')">
                         @if ($sortBy != 'name')
                             <i class="fa fa-sort mr-1"></i>
@@ -49,3 +49,30 @@
     </div>
     {{ $serviceCategories->links() }}
 </div>
+@script
+    <script>
+        $wire.on('delete-prompt', (event) => {
+            swal.fire({
+                title: 'Are you sure?',
+                html: "You're about to delete <strong>" + event.serviceCategory.name +
+                    "</strong>. This action is permanent!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#C82333',
+                cancelButtonColor: '#5A6268',
+                confirmButtonText: 'Delete record'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('service-category-delete', {
+                        id: event.serviceCategory.id
+                    })
+                }
+            })
+        })
+
+        var modal = document.getElementById('serviceCategoryModal')
+        modal.addEventListener('hidden.bs.modal', (event) => {
+            $wire.dispatch('reset-modal')
+        })
+    </script>
+@endscript
