@@ -8,7 +8,7 @@ use Livewire\Form;
 
 class ServiceCategoryForm extends Form
 {
-    public ?ServiceCategory $serviceCategory;
+    public ServiceCategory $serviceCategory;
     public $isEditing = false;
 
     public $name = '';

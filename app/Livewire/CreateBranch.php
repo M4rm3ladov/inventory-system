@@ -48,7 +48,7 @@ class CreateBranch extends Component
     #[On('branch-edit')]
     public function edit($id)
     {
-        $this->isEditing = true;
+        $this->form->isEditing = $this->isEditing = true;
         $this->form->setBranch($id);
     }
 

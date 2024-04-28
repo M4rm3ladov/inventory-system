@@ -9,6 +9,7 @@ use Livewire\Form;
 class SupplierForm extends Form
 {
     public ?Supplier $supplier;
+    public $isEditing = false;
 
     public $name = '';
 
@@ -20,6 +21,23 @@ class SupplierForm extends Form
 
     public function rules()
     {
+        if (!$this->isEditing) {
+            return [
+                'name' => [
+                    'required', 'min:3', 'unique:suppliers'
+                ],
+                'address' => [
+                    'required', 'min:3', 'unique:suppliers'
+                ],
+                'email' => [
+                    'required', 'email', 'unique:suppliers'
+                ],
+                'phone' => [
+                    'required', 'max:15', 'unique:suppliers'
+                ],
+            ];
+        }
+
         return [
             'name' => [
                 'required', 'min:3',

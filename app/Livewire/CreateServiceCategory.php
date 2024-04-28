@@ -44,11 +44,6 @@ class CreateServiceCategory extends Component
         $this->dispatch('refresh-service-category')->to(AllServiceCategories::class);
     }
 
-    #[On('service-category-create')]
-    public function create() {
-        $this->form->isEditing = false;
-    }
-
     #[On('service-category-edit')]
     public function edit($id)
     {

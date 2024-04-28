@@ -2,7 +2,7 @@
     <h4 class="card-title">List of Service Categories</h4>
     {{-- action buttons --}}
     <div class="mt-4">
-        <button wire:click="$dispatch('service-category-create')" data-bs-target="#serviceCategoryModal" type="button" class="btn btn-success" data-bs-toggle="modal">
+        <button data-bs-target="#serviceCategoryModal" type="button" class="btn btn-success" data-bs-toggle="modal">
             <i class="fa fa-add"></i>
             <span class="ms-1">Add a New Service Category</span>
         </button>
