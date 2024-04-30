@@ -23,7 +23,7 @@
     </div>
     <div class="d-flex flex-row ms-auto mt-2">
         <label class="my-auto text-nowrap">Category:</label>
-        <select wire:model.live="category" wire:change="categoryChange" class="form-select form-select ms-2"
+        <select wire:model.live="category" wire:change="filterChange" class="form-select form-select ms-2"
             aria-label="Result Count">
             <option value={{ -1 }} selected>All</option>
             @foreach ($serviceCategories as $serviceCategory)
@@ -37,15 +37,15 @@
         <div class="d-flex flex-row me-2">
             <label class="my-auto me-2 text-nowrap">Price A:</label>
             <div class="d-flex flex-row" style="width: 180px;">
-                <input wire:model.live.debounce.300ms="priceAFrom" type="number" class="form-control me-2">
-                <input wire:model.live.debounce.300ms="priceATo" type="number" class="form-control">
+                <input wire:model.live.debounce.300ms="priceAFrom" wire:change="filterChange" type="number" class="form-control me-2">
+                <input wire:model.live.debounce.300ms="priceATo" wire:change="filterChange" type="number" class="form-control">
             </div>
         </div>
         <div class="d-flex flex-row ">
             <label class="my-auto me-2 text-nowrap">Price B:</label>
             <div class="d-flex flex-row" style="width: 180px;">
-                <input wire:model.live.debounce.300ms="priceBFrom" type="number" class="form-control me-2">
-                <input wire:model.live.debounce.300ms="priceBTo" type="number" class="form-control">
+                <input wire:model.live.debounce.300ms="priceBFrom" wire:change="filterChange" type="number" class="form-control me-2">
+                <input wire:model.live.debounce.300ms="priceBTo" wire:change="filterChange" type="number" class="form-control">
             </div>
         </div>
     </div>

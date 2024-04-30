@@ -53,7 +53,7 @@
             </thead>
             <tbody>
                 @foreach ($branches as $branch)
-                    <tr>
+                    <tr wire:key="{{ $branch->id }}">
                         <th scope="row">{{ ($branches ->currentpage() - 1) * $branches->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $branch->name }}</td>
                         <td>{{ $branch->address }}</td>

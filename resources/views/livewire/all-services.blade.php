@@ -73,7 +73,7 @@
             </thead>
             <tbody>
                 @foreach ($services as $service)
-                    <tr>
+                    <tr wire:key="{{ $service->id }}">
                         <th scope="row">{{ ($services ->currentpage() - 1) * $services->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $service->code }}</td>
                         <td class="text-nowrap">{{ $service->serviceName }}</td>

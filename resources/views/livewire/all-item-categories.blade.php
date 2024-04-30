@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 @foreach ($itemCategories as $itemCategory)
-                    <tr>
+                    <tr wire:key="{{ $itemCategory->id }}">
                         <th scope="row">{{ ($itemCategories ->currentpage() - 1) * $itemCategories->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $itemCategory->name }}</td>
                         <td class="text-nowrap">

@@ -68,7 +68,7 @@ class AllServices extends Component
         $this->priceBTo = '';
     }
 
-    public function categoryChange()
+    public function filterChange()
     {
         $this->updatedSearchQuery();
     }

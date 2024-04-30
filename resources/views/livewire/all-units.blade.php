@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 @foreach ($units as $unit)
-                    <tr>
+                    <tr wire:key="{{ $unit->id }}">
                         <th scope="row">{{ ($units ->currentpage() - 1) * $units->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $unit->name }}</td>
                         <td class="text-nowrap">
