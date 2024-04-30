@@ -68,7 +68,8 @@ class AllServices extends Component
         $this->priceBTo = '';
     }
 
-    public function categoryChange() {
+    public function categoryChange()
+    {
         $this->updatedSearchQuery();
     }
 
@@ -127,11 +128,20 @@ class AllServices extends Component
         }, 'services.pdf');
     }
 
-    // public function exportExcel()
-    // {
-    //     return (new ServicesExport($this->searchQuery))
-    //         ->download('services.xls');
-    // }
+    public function exportExcel()
+    {
+        return (new ServicesExport(
+            $this->searchQuery,
+            $this->sortBy,
+            $this->sortDirection,
+            $this->category,
+            $this->priceAFrom,
+            $this->priceATo,
+            $this->priceBFrom,
+            $this->priceBTo
+        ))
+            ->download('services.xls');
+    }
 
     public function updatedSearchQuery()
     {
