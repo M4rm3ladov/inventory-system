@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Exports\SuppliersExport;
 use App\Models\Supplier;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -57,16 +58,18 @@ class AllSuppliers extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function suppliers() {
+        return Supplier::search($this->searchQuery)
+        ->orderBy($this->sortBy, $this->sortDirection)
+        ->paginate($this->pagination);
+
+    }
+
     #[On('refresh-supplier')]
     public function render()
     {
-        $suppliers = Supplier::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-suppliers', [
-            'suppliers' => $suppliers,
-        ]);
+        return view('livewire.all-suppliers');
     }
 
     public function exportPdf()

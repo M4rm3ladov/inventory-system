@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Exports\UnitsExport;
 use App\Models\Unit;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -57,16 +58,17 @@ class AllUnits extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function units() {
+        return Unit::search($this->searchQuery)
+                ->orderBy($this->sortBy, $this->sortDirection)
+                ->paginate($this->pagination);
+    }
+
     #[On('refresh-unit')]
     public function render()
     {
-        $units = Unit::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-units', [
-            'units' => $units,
-        ]);
+        return view('livewire.all-units');
     }
 
     public function exportPdf()

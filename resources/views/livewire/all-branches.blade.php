@@ -34,9 +34,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($branches as $branch)
+                @foreach ($this->branches as $branch)
                     <tr wire:key="{{ $branch->id }}">
-                        <th scope="row">{{ ($branches ->currentpage() - 1) * $branches->perpage() + $loop->index + 1 }}</th>
+                        <th scope="row">{{ ($this->branches ->currentpage() - 1) * $this->branches->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $branch->name }}</td>
                         <td>{{ $branch->address }}</td>
                         <td class="text-nowrap">{{ $branch->email }}</td>
@@ -53,7 +53,7 @@
             </tbody>
         </table>
     </div>
-    {{ $branches->links() }}
+    {{ $this->branches->links() }}
 </div>
 @script
     <script>

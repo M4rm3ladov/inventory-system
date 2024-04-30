@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Exports\ServiceCategoriesExport;
 use App\Models\ServiceCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,9 +16,17 @@ use Livewire\WithPagination;
 class AllServiceCategories extends Component
 {
     use WithPagination;
+
+    #[Url(history: 'true')]
     public $searchQuery = '';
+
+    #[Url()]
     public $pagination = 10;
+
+    #[Url(history: 'true')]
     public $sortBy = 'created_at';
+
+    #[Url(history: 'true')]
     public $sortDirection = 'DESC';
 
     public function placeholder()
@@ -39,7 +49,8 @@ class AllServiceCategories extends Component
         HTML;
     }
 
-    public function setSortBy($sortByField) {
+    public function setSortBy($sortByField)
+    {
         if ($this->sortBy === $sortByField) {
             $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
             return;
@@ -49,24 +60,26 @@ class AllServiceCategories extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function serviceCategories()
+    {
+        return ServiceCategory::search($this->searchQuery)
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->pagination);
+    }
+
     #[On('refresh-service-category')]
     public function render()
     {
-        $serviceCategories = ServiceCategory::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-service-categories', [
-            'serviceCategories' => $serviceCategories,
-        ]);
+        return view('livewire.all-service-categories');
     }
 
     public function exportPdf()
     {
         $serviceCategories = ServiceCategory::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->get()
-                ->toArray();
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->get()
+            ->toArray();
 
         $pdf = Pdf::loadView('service.service-categories-pdf', ['serviceCategories' => $serviceCategories]);
 

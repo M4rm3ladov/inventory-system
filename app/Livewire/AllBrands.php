@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Exports\BrandsExport;
 use App\Models\Brand;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -58,16 +59,17 @@ class AllBrands extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function brands() {
+        return Brand::search($this->searchQuery)
+                ->orderBy($this->sortBy, $this->sortDirection)
+                ->paginate($this->pagination);
+    }
+
     #[On('refresh-brand')]
     public function render()
     {
-        $brands = Brand::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-brands', [
-            'brands' => $brands,
-        ]);
+        return view('livewire.all-brands');
     }
 
     public function exportPdf()

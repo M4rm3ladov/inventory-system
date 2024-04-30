@@ -34,10 +34,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($suppliers as $supplier)
+                @foreach ($this->suppliers as $supplier)
                     <tr wire:key="{{ $supplier->id }}">
                         <th scope="row">
-                            {{ ($suppliers->currentpage() - 1) * $suppliers->perpage() + $loop->index + 1 }}</th>
+                            {{ ($this->suppliers->currentpage() - 1) * $this->suppliers->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $supplier->name }}</td>
                         <td>{{ $supplier->address }}</td>
                         <td class="text-nowrap">{{ $supplier->email }}</td>
@@ -55,7 +55,7 @@
             </tbody>
         </table>
     </div>
-    {{ $suppliers->links() }}
+    {{ $this->suppliers->links() }}
 </div>
 @script
     <script>

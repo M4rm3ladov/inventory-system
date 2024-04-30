@@ -25,9 +25,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($serviceCategories as $serviceCategory)
+                @foreach ($this->serviceCategories as $serviceCategory)
                     <tr wire:key="{{ $serviceCategory->id }}">
-                        <th scope="row">{{ ($serviceCategories ->currentpage() - 1) * $serviceCategories->perpage() + $loop->index + 1 }}</th>
+                        <th scope="row">{{ ($this->serviceCategories ->currentpage() - 1) * $this->serviceCategories->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $serviceCategory->name }}</td>
                         <td class="text-nowrap">
                             <button wire:click="$dispatch('service-category-edit', {id:{{ $serviceCategory->id }}})"
@@ -41,7 +41,7 @@
             </tbody>
         </table>
     </div>
-    {{ $serviceCategories->links() }}
+    {{ $this->serviceCategories->links() }}
 </div>
 @script
     <script>

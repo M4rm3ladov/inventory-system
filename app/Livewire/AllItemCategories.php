@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Exports\ItemCategoriesExport;
 use App\Models\ItemCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,9 +16,17 @@ use Livewire\WithPagination;
 class AllItemCategories extends Component
 {
     use WithPagination;
+
+    #[Url(history:'true')]
     public $searchQuery = '';
+
+    #[Url()]
     public $pagination = 10;
+
+    #[Url(history:'true')]
     public $sortBy = 'created_at';
+
+    #[Url(history:'true')]
     public $sortDirection = 'DESC';
 
     public function placeholder()
@@ -49,16 +59,17 @@ class AllItemCategories extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function itemCategories() {
+        return ItemCategory::search($this->searchQuery)
+                ->orderBy($this->sortBy, $this->sortDirection)
+                ->paginate($this->pagination);
+    }
+
     #[On('refresh-item-category')]
     public function render()
     {
-        $itemCategories = ItemCategory::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-item-categories', [
-            'itemCategories' => $itemCategories,
-        ]);
+        return view('livewire.all-item-categories');
     }
 
     public function exportPdf()

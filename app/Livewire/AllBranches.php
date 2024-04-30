@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Exports\BranchesExport;
 use App\Models\Branch;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -16,16 +17,16 @@ class AllBranches extends Component
 {
     use WithPagination;
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $searchQuery = '';
 
-    #[Url()]    
+    #[Url()]
     public $pagination = 10;
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $sortBy = 'created_at';
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $sortDirection = 'DESC';
 
     public function placeholder()
@@ -48,7 +49,8 @@ class AllBranches extends Component
         HTML;
     }
 
-    public function setSortBy($sortByField) {
+    public function setSortBy($sortByField)
+    {
         if ($this->sortBy === $sortByField) {
             $this->sortDirection = ($this->sortDirection == 'ASC') ? 'DESC' : 'ASC';
             return;
@@ -58,24 +60,26 @@ class AllBranches extends Component
         $this->sortDirection = 'DESC';
     }
 
+    #[Computed()]
+    public function branches()
+    {
+        return Branch::search($this->searchQuery)
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate($this->pagination);
+    }
+
     #[On('refresh-branch')]
     public function render()
     {
-        $branches = Branch::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->paginate($this->pagination);
-
-        return view('livewire.all-branches', [
-            'branches' => $branches,
-        ]);
+        return view('livewire.all-branches');
     }
 
     public function exportPdf()
     {
         $branches = Branch::search($this->searchQuery)
-                ->orderBy($this->sortBy, $this->sortDirection)
-                ->get()
-                ->toArray();
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->get()
+            ->toArray();
 
         $pdf = Pdf::loadView('branch.branches-pdf', ['branches' => $branches]);
 
