@@ -7,6 +7,7 @@ use App\Models\Brand;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,9 +15,17 @@ use Livewire\WithPagination;
 class AllBrands extends Component
 {
     use WithPagination;
+
+    #[Url(history:'true')]
     public $searchQuery = '';
+
+    #[Url()]
     public $pagination = 10;
+
+    #[Url(history:'true')]
     public $sortBy = 'created_at';
+
+    #[Url(history:'true')]
     public $sortDirection = 'DESC';
 
     public function placeholder()

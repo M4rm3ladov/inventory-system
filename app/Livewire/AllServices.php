@@ -8,6 +8,7 @@ use App\Models\ServiceCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,16 +16,32 @@ use Livewire\WithPagination;
 class AllServices extends Component
 {
     use WithPagination;
+
+    #[Url(history:'true')]
     public $searchQuery = '';
+
+    #[Url()]
     public $pagination = 10;
 
+    #[Url(history:'true')]
     public $sortBy = 'created_at';
+
+    #[Url(history:'true')]
     public $sortDirection = 'DESC';
+    
+    #[Url(history:'true')]
     public $category = -1;
 
+    #[Url(history:'true')]
     public $priceAFrom = '';
+
+    #[Url(history:'true')]
     public $priceATo = '';
+    
+    #[Url(history:'true')]
     public $priceBFrom = '';
+
+    #[Url(history:'true')]
     public $priceBTo = '';
 
     public function placeholder()
