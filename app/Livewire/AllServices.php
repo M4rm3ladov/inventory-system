@@ -71,6 +71,7 @@ class AllServices extends Component
     public function render()
     {
         $services = Service::search($this->searchQuery)
+            ->select('services.name AS service_name', 'services.*')
             ->when($this->category != -1, function ($query) {
                 $query->where('service_category_id', $this->category);
             })
@@ -79,10 +80,18 @@ class AllServices extends Component
             })
             ->when($this->priceBFrom && $this->priceBTo != '', function ($query) {
                 $query->whereBetween('price_B', [$this->priceBFrom, $this->priceBTo]);
-            })
-            ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate($this->pagination);
+            });
 
+        // order by for category relationship
+        if ($this->sortBy == 'category') {
+            $services = $services->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
+                ->orderBy('service_categories.name', $this->sortDirection);
+        } else {
+            $services = $services->orderBy($this->sortBy, $this->sortDirection);
+        }
+        // add pagination
+        $services = $services->paginate($this->pagination);
+        
         $serviceCategories = ServiceCategory::all();
 
         return view('livewire.all-services', [

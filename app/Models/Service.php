@@ -18,13 +18,19 @@ class Service extends Model
         'price_B',
     ];
 
-    public function serviceCategory() {
+    public function getTagNameAttribute()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function serviceCategory()
+    {
         return $this->belongsTo(ServiceCategory::class);
     }
 
     public function scopeSearch($query, $value)
     {
         $query->where('code', 'like', "%{$value}%")
-            ->orWhere('name', 'like', "%{$value}%");
+            ->orWhere('services.name', 'like', "%{$value}%");
     }
 }

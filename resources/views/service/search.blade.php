@@ -18,7 +18,7 @@
     <div class="ms-auto mt-2 d-flex flex-row">
         <div class="d-flex flex-row ms-2">
             <label class="my-auto text-nowrap">Category:</label>
-            <select wire:model.live="category" class="form-select form-select mx-2" aria-label="Result Count">
+            <select wire:model.live="category" class="form-select form-select-sm mx-2" aria-label="Result Count">
                 <option value={{ -1 }} selected>All</option>
                 @foreach ($serviceCategories as $serviceCategory)
                     <option value="{{ $serviceCategory->id }}">
