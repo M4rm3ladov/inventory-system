@@ -76,7 +76,7 @@
                     <tr>
                         <th scope="row">{{ ($services ->currentpage() - 1) * $services->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $service->code }}</td>
-                        <td class="text-nowrap">{{ $service->name }}</td>
+                        <td class="text-nowrap">{{ $service->serviceName }}</td>
                         <td class="text-nowrap"><img style="width: 100px;" src="{{ $service->image }}"></td>
                         <td class="text-nowrap">{{ $service->serviceCategory->name }}</td>
                         <td class="text-nowrap">{{ $service->price_A }}</td>

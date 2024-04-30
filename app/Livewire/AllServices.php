@@ -60,6 +60,7 @@ class AllServices extends Component
 
     public function resetFilter()
     {
+        $this->searchQuery = '';
         $this->category = -1;
         $this->priceAFrom = '';
         $this->priceATo = '';
@@ -67,11 +68,16 @@ class AllServices extends Component
         $this->priceBTo = '';
     }
 
+    public function categoryChange() {
+        $this->updatedSearchQuery();
+    }
+
     #[On('refresh-service')]
     public function render()
     {
         $services = Service::search($this->searchQuery)
-            ->select('services.name AS service_name', 'services.*')
+            ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
+            ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->when($this->category != -1, function ($query) {
                 $query->where('service_category_id', $this->category);
             })
@@ -84,25 +90,24 @@ class AllServices extends Component
 
         // order by for category relationship
         if ($this->sortBy == 'category') {
-            $services = $services->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-                ->orderBy('service_categories.name', $this->sortDirection);
+            $services = $services->orderBy('categoryName', $this->sortDirection);
         } else {
             $services = $services->orderBy($this->sortBy, $this->sortDirection);
         }
         // add pagination
         $services = $services->paginate($this->pagination);
-        
-        $serviceCategories = ServiceCategory::all();
 
         return view('livewire.all-services', [
             'services' => $services,
-            'serviceCategories' => $serviceCategories
+            'serviceCategories' => ServiceCategory::all()
         ]);
     }
 
     public function exportPdf()
     {
         $services = Service::search($this->searchQuery)
+            ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
+            ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->when($this->category != -1, function ($query) {
                 $query->where('service_category_id', $this->category);
             })
@@ -112,7 +117,6 @@ class AllServices extends Component
             ->when($this->priceBFrom && $this->priceBTo != '', function ($query) {
                 $query->whereBetween('price_B', [$this->priceBFrom, $this->priceBTo]);
             })
-            ->orderBy($this->sortBy, $this->sortDirection)
             ->get()
             ->toArray();
 

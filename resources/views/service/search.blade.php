@@ -10,29 +10,28 @@
             </select>
             <label class="my-auto">entries</label>
         </div>
-        <div class="d-flex flex-row ms-auto">
+        <div class="d-flex flex-row ms-auto me-2">
             <label class="my-auto me-2">Search:</label>
             <input wire:model.live.debounce.300ms="searchQuery" type="text" class="form-control">
         </div>
-    </div>
-    <div class="ms-auto mt-2 d-flex flex-row">
-        <div class="d-flex flex-row ms-2">
-            <label class="my-auto text-nowrap">Category:</label>
-            <select wire:model.live="category" class="form-select form-select-sm mx-2" aria-label="Result Count">
-                <option value={{ -1 }} selected>All</option>
-                @foreach ($serviceCategories as $serviceCategory)
-                    <option value="{{ $serviceCategory->id }}">
-                        {{ $serviceCategory->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div>
+        <div class="">
             <button wire:click="resetFilter" type="button" class="btn btn-danger">
                 <i class="fa fa-filter-circle-xmark"></i>
                 <span class="ms-1">Reset Filter</span>
             </button>
         </div>
+    </div>
+    <div class="d-flex flex-row ms-auto mt-2">
+        <label class="my-auto text-nowrap">Category:</label>
+        <select wire:model.live="category" wire:change="categoryChange" class="form-select form-select ms-2"
+            aria-label="Result Count">
+            <option value={{ -1 }} selected>All</option>
+            @foreach ($serviceCategories as $serviceCategory)
+                <option value="{{ $serviceCategory->id }}">
+                    {{ $serviceCategory->name }}
+                </option>
+            @endforeach
+        </select>
     </div>
     <div class="d-flex flex-row ms-auto mt-2">
         <div class="d-flex flex-row me-2">
