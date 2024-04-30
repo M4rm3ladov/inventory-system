@@ -15,10 +15,14 @@ class ServiceCategoriesExport implements FromQuery, WithMapping, WithHeadings, W
 {
     use Exportable;
     protected $searchQuery;
+    protected $sortBy;
+    protected $sortDirection;
 
-    public function __construct($searchQuery)
+    public function __construct($searchQuery, $sortBy, $sortDirection)
     {
         $this->searchQuery = $searchQuery;
+        $this->sortBy = $sortBy;
+        $this->sortDirection = $sortDirection;
     }
 
     public function styles(Worksheet $sheet)
@@ -47,6 +51,7 @@ class ServiceCategoriesExport implements FromQuery, WithMapping, WithHeadings, W
 
     public function query()
     {
-        return ServiceCategory::search($this->searchQuery);
+        return ServiceCategory::search($this->searchQuery)
+            ->orderBy($this->sortBy, $this->sortDirection);
     }
 }

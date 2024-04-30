@@ -77,7 +77,7 @@ class AllBranches extends Component
 
     public function exportExcel()
     {
-        return (new BranchesExport($this->searchQuery))
+        return (new BranchesExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('branches.xls');
     }
 

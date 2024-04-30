@@ -77,7 +77,7 @@ class AllBrands extends Component
 
     public function exportExcel()
     {
-        return (new BrandsExport($this->searchQuery))
+        return (new BrandsExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('brands.xls');
     }
 

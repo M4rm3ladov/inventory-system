@@ -15,10 +15,14 @@ class UnitsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, S
 {
     use Exportable;
     protected $searchQuery;
+    protected $sortBy;
+    protected $sortDirection;
 
-    public function __construct($searchQuery)
+    public function __construct($searchQuery, $sortBy, $sortDirection)
     {
         $this->searchQuery = $searchQuery;
+        $this->sortBy = $sortBy;
+        $this->sortDirection = $sortDirection;
     }
 
     public function styles(Worksheet $sheet)
@@ -47,7 +51,8 @@ class UnitsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, S
 
     public function query()
     {
-        return Unit::search($this->searchQuery);
+        return Unit::search($this->searchQuery)
+            ->orderBy($this->sortBy, $this->sortDirection);
     }
 }
 

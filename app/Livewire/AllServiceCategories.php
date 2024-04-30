@@ -77,7 +77,7 @@ class AllServiceCategories extends Component
 
     public function exportExcel()
     {
-        return (new ServiceCategoriesExport($this->searchQuery))
+        return (new ServiceCategoriesExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('service-categories.xls');
     }
 

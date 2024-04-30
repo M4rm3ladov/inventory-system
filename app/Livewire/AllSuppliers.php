@@ -76,7 +76,7 @@ class AllSuppliers extends Component
 
     public function exportExcel()
     {
-        return (new SuppliersExport($this->searchQuery))
+        return (new SuppliersExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('suppliers.xls');
     }
 

@@ -77,7 +77,7 @@ class AllUnits extends Component
 
     public function exportExcel()
     {
-        return (new UnitsExport($this->searchQuery))
+        return (new UnitsExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('product-units.xls');
     }
 

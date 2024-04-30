@@ -77,7 +77,7 @@ class AllItemCategories extends Component
 
     public function exportExcel()
     {
-        return (new ItemCategoriesExport($this->searchQuery))
+        return (new ItemCategoriesExport($this->searchQuery, $this->sortBy, $this->sortDirection))
             ->download('item-categories.xls');
     }
 

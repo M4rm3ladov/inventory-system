@@ -16,10 +16,14 @@ class SuppliersExport implements FromQuery, WithMapping, WithHeadings, WithStyle
 {
     use Exportable;
     protected $searchQuery;
+    protected $sortBy;
+    protected $sortDirection;
 
-    public function __construct($searchQuery)
+    public function __construct($searchQuery, $sortBy, $sortDirection)
     {
         $this->searchQuery = $searchQuery;
+        $this->sortBy = $sortBy;
+        $this->sortDirection = $sortDirection;
     }
 
     public function styles(Worksheet $sheet)
@@ -62,6 +66,7 @@ class SuppliersExport implements FromQuery, WithMapping, WithHeadings, WithStyle
 
     public function query()
     {
-        return Supplier::search($this->searchQuery);
+        return Supplier::search($this->searchQuery)
+            ->orderBy($this->sortBy, $this->sortDirection);
     }
 }
