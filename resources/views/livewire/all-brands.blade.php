@@ -17,16 +17,10 @@
             <thead class="sticky-top top-0">
                 <tr>
                     <th scope="col" data-sortable="true">#</th>
-                    <th scope="col" data-sortable="true" wire:click="setSortBy('name')">
-                        @if ($sortBy != 'name')
-                            <i class="fa fa-sort mr-1"></i>
-                        @elseif ($sortDirection == 'ASC')
-                            <i class="fa fa-sort-up mr-1"></i>
-                        @else
-                            <i class="fa fa-sort-down mr-1"></i>
-                        @endif
-                        <span>Name<span>
-                    </th>
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'name',
+                        'colDisplay' => 'Name',
+                    ])
                     <th scope="col" data-sortable="true">Action</th>
                 </tr>
             </thead>

@@ -17,36 +17,18 @@
             <thead class="sticky-top top-0 z-0">
                 <tr>
                     <th scope="col" data-sortable="true">#</th>
-                    <th scope="col" data-sortable="true" wire:click="setSortBy('name')">
-                        @if ($sortBy != 'name')
-                            <i class="fa fa-sort mr-1"></i>
-                        @elseif ($sortDirection == 'ASC')
-                            <i class="fa fa-sort-up mr-1"></i>
-                        @else
-                            <i class="fa fa-sort-down mr-1"></i>
-                        @endif
-                        <span>Name<span>
-                    </th>
-                    <th scope="col" data-sortable="true" wire:click="setSortBy('address')">
-                        @if ($sortBy != 'address')
-                            <i class="fa fa-sort mr-1"></i>
-                        @elseif ($sortDirection == 'ASC')
-                            <i class="fa fa-sort-up mr-1"></i>
-                        @else
-                            <i class="fa fa-sort-down mr-1"></i>
-                        @endif
-                        <span>Address<span>
-                    </th>
-                    <th scope="col" wire:click="setSortBy('email')">
-                        @if ($sortBy != 'email')
-                            <i class="fa fa-sort mr-1"></i>
-                        @elseif ($sortDirection == 'ASC')
-                            <i class="fa fa-sort-up mr-1"></i>
-                        @else
-                            <i class="fa fa-sort-down mr-1"></i>
-                        @endif
-                        <span>Email</span>
-                    </th>
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'name',
+                        'colDisplay' => 'Name',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'address',
+                        'colDisplay' => 'Address',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'email',
+                        'colDisplay' => 'Email',
+                    ])
                     <th scope="col" wire:click="setSortBy('phone')">Phone</th>
                     <th scope="col" data-sortable="true">Action</th>
                 </tr>
