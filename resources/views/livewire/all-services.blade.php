@@ -42,10 +42,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($services as $service)
+                @foreach ($this->services as $service)
                     <tr wire:key="{{ $service->id }}">
                         <th scope="row">
-                            {{ ($services->currentpage() - 1) * $services->perpage() + $loop->index + 1 }}</th>
+                            {{ ($this->services->currentpage() - 1) * $this->services->perpage() + $loop->index + 1 }}</th>
                         <td class="text-nowrap">{{ $service->code }}</td>
                         <td class="text-nowrap">{{ $service->serviceName }}</td>
                         <td class="text-nowrap"><img style="width: 100px;" src="{{ $service->image }}"></td>
@@ -65,7 +65,7 @@
             </tbody>
         </table>
     </div>
-    {{ $services->links() }}
+    {{ $this->services->links() }}
 </div>
 @script
     <script>

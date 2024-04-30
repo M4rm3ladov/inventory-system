@@ -6,6 +6,7 @@ use App\Exports\ServicesExport;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
@@ -90,9 +91,8 @@ class AllServices extends Component
         $this->updatedSearchQuery();
     }
 
-    #[On('refresh-service')]
-    public function render()
-    {
+    #[Computed()]
+    public function services() {
         $services = Service::search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
@@ -115,10 +115,18 @@ class AllServices extends Component
         // add pagination
         $services = $services->paginate($this->pagination);
 
-        return view('livewire.all-services', [
-            'services' => $services,
-            'serviceCategories' => ServiceCategory::all()
-        ]);
+        return $services;
+    }
+
+    #[Computed()]
+    public function serviceCategories() {
+        return ServiceCategory::all();
+    }
+
+    #[On('refresh-service')]
+    public function render()
+    {
+        return view('livewire.all-services');
     }
 
     public function exportPdf()

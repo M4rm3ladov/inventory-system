@@ -26,7 +26,7 @@
         <select wire:model.live="category" wire:change="filterChange" class="form-select form-select ms-2"
             aria-label="Result Count">
             <option value={{ -1 }} selected>All</option>
-            @foreach ($serviceCategories as $serviceCategory)
+            @foreach ($this->serviceCategories as $serviceCategory)
                 <option value="{{ $serviceCategory->id }}">
                     {{ $serviceCategory->name }}
                 </option>
