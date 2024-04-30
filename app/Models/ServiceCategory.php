@@ -15,6 +15,10 @@ class ServiceCategory extends Model
         'name'
     ];
 
+    public function services() {
+        return $this->hasMany(Service::class, 'service_category_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%");

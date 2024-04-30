@@ -18,12 +18,13 @@ class Service extends Model
         'price_B',
     ];
 
-    public function service_categories() {
-        return $this->hasOne(ServiceCategory::class);
+    public function serviceCategory() {
+        return $this->belongsTo(ServiceCategory::class);
     }
 
     public function scopeSearch($query, $value)
     {
-        $query->where('name', 'like', "%{$value}%");
+        $query->where('code', 'like', "%{$value}%")
+            ->orWhere('name', 'like', "%{$value}%");
     }
 }
