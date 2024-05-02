@@ -24,16 +24,16 @@ class SupplierForm extends Form
         if (!$this->isEditing) {
             return [
                 'name' => [
-                    'required', 'min:3', 'unique:suppliers'
+                    'required', 'min:3', 'unique:suppliers,name'
                 ],
                 'address' => [
-                    'required', 'min:3', 'unique:suppliers'
+                    'required', 'min:3', 'unique:suppliers,address'
                 ],
                 'email' => [
-                    'required', 'email', 'unique:suppliers'
+                    'required', 'email', 'unique:suppliers,email'
                 ],
                 'phone' => [
-                    'required', 'max:15', 'unique:suppliers'
+                    'required', 'max:15', 'unique:suppliers,phone'
                 ],
             ];
         }

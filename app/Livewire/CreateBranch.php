@@ -23,7 +23,6 @@ class CreateBranch extends Component
         ]);
 
         $this->resetInputs();
-        //return $this->redirect('/branches');
         $this->dispatch('refresh-branch')->to(AllBranches::class);
     }
 

@@ -18,31 +18,31 @@ class AllServices extends Component
 {
     use WithPagination;
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $searchQuery = '';
 
     #[Url()]
     public $pagination = 10;
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $sortBy = 'created_at';
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $sortDirection = 'DESC';
-    
-    #[Url(history:'true')]
-    public $category = -1;
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
+    public $category = 'All';
+
+    #[Url(history: 'true')]
     public $priceAFrom = '';
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $priceATo = '';
-    
-    #[Url(history:'true')]
+
+    #[Url(history: 'true')]
     public $priceBFrom = '';
 
-    #[Url(history:'true')]
+    #[Url(history: 'true')]
     public $priceBTo = '';
 
     public function placeholder()
@@ -79,7 +79,8 @@ class AllServices extends Component
     public function resetFilter()
     {
         $this->searchQuery = '';
-        $this->category = -1;
+        $this->sortBy = 'created_at';
+        $this->category = 'All';
         $this->priceAFrom = '';
         $this->priceATo = '';
         $this->priceBFrom = '';
@@ -92,12 +93,13 @@ class AllServices extends Component
     }
 
     #[Computed()]
-    public function services() {
+    public function services()
+    {
         $services = Service::search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-            ->when($this->category != -1, function ($query) {
-                $query->where('service_category_id', $this->category);
+            ->when($this->category != 'All', function ($query) {
+                $query->where('service_categories.name', $this->category);
             })
             ->when($this->priceAFrom && $this->priceATo != '', function ($query) {
                 $query->whereBetween('price_A', [$this->priceAFrom, $this->priceATo]);
@@ -108,7 +110,7 @@ class AllServices extends Component
 
         // order by for category relationship
         if ($this->sortBy == 'category') {
-            $services = $services->orderBy('categoryName', $this->sortDirection);
+            $services = $services->orderBy('service_categories.name', $this->sortDirection);
         } else {
             $services = $services->orderBy($this->sortBy, $this->sortDirection);
         }
@@ -119,7 +121,8 @@ class AllServices extends Component
     }
 
     #[Computed()]
-    public function serviceCategories() {
+    public function serviceCategories()
+    {
         return ServiceCategory::all();
     }
 
@@ -134,8 +137,8 @@ class AllServices extends Component
         $services = Service::search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-            ->when($this->category != -1, function ($query) {
-                $query->where('service_category_id', $this->category);
+            ->when($this->category != 'All', function ($query) {
+                $query->where('service_categories.name', $this->category);
             })
             ->when($this->priceAFrom && $this->priceATo != '', function ($query) {
                 $query->whereBetween('price_A', [$this->priceAFrom, $this->priceATo]);

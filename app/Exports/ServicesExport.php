@@ -94,8 +94,8 @@ class ServicesExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         $services = Service::search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-            ->when($this->category != -1, function ($query) {
-                $query->where('service_category_id', $this->category);
+            ->when($this->category != 'All', function ($query) {
+                $query->where('service_categories.name', $this->category);
             })
             ->when($this->priceAFrom && $this->priceATo != '', function ($query) {
                 $query->whereBetween('price_A', [$this->priceAFrom, $this->priceATo]);
@@ -106,7 +106,7 @@ class ServicesExport implements FromQuery, WithMapping, WithHeadings, WithStyles
 
         // order by for category relationship
         if ($this->sortBy == 'category') {
-            $services = $services->orderBy('categoryName', $this->sortDirection);
+            $services = $services->orderBy('service_categories.name', $this->sortDirection);
         } else {
             $services = $services->orderBy($this->sortBy, $this->sortDirection);
         }

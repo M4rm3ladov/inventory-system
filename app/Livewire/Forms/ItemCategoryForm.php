@@ -18,7 +18,7 @@ class ItemCategoryForm extends Form
         if (!$this->isEditing) {
             return [
                 'name' => [
-                    'required', 'min:3', 'unique:item_categories'
+                    'required', 'min:3', 'unique:item_categories,name'
                 ]
             ];
         }

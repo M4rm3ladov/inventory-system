@@ -23,11 +23,10 @@
     </div>
     <div class="d-flex flex-row ms-auto mt-2">
         <label class="my-auto text-nowrap">Category:</label>
-        <select wire:model.live="category" wire:change="filterChange" class="form-select form-select ms-2"
-            aria-label="Result Count">
-            <option value={{ -1 }} selected>All</option>
+        <select wire:model.live="category" wire:change="filterChange" class="form-select form-select ms-2">
+            <option value="All" selected>All</option>
             @foreach ($this->serviceCategories as $serviceCategory)
-                <option value="{{ $serviceCategory->id }}">
+                <option value="{{ $serviceCategory->name }}">
                     {{ $serviceCategory->name }}
                 </option>
             @endforeach

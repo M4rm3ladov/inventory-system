@@ -18,7 +18,7 @@ class BrandForm extends Form
         if (!$this->isEditing) {
             return [
                 'name' => [
-                    'required', 'min:3', 'unique:brands'
+                    'required', 'min:3', 'unique:brands,name'
                 ]
             ];
         }

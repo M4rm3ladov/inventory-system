@@ -17,14 +17,14 @@
             <thead class="sticky-top top-0 z-0">
                 <tr>
                     <th scope="col" data-sortable="true">#</h>
-                    @include('shared-layout.table-sortable-th', [
-                        'colName' => 'code',
-                        'colDisplay' => 'Code',
-                    ])
-                    @include('shared-layout.table-sortable-th', [
-                        'colName' => 'name',
-                        'colDisplay' => 'Name',
-                    ])
+                        @include('shared-layout.table-sortable-th', [
+                            'colName' => 'code',
+                            'colDisplay' => 'Code',
+                        ])
+                        @include('shared-layout.table-sortable-th', [
+                            'colName' => 'name',
+                            'colDisplay' => 'Name',
+                        ])
                     <th scope="col">Image</th>
                     @include('shared-layout.table-sortable-th', [
                         'colName' => 'category',
@@ -45,15 +45,23 @@
                 @foreach ($this->services as $service)
                     <tr wire:key="{{ $service->id }}">
                         <th scope="row">
-                            {{ ($this->services->currentpage() - 1) * $this->services->perpage() + $loop->index + 1 }}</th>
+                            {{ ($this->services->currentpage() - 1) * $this->services->perpage() + $loop->index + 1 }}
+                        </th>
                         <td class="text-nowrap">{{ $service->code }}</td>
                         <td class="text-nowrap">{{ $service->serviceName }}</td>
-                        <td class="text-nowrap"><img style="width: 100px;" src="{{ $service->image }}"></td>
+                        <td class="text-nowrap text-center">
+                            <a href="{{ $service->image ? url('storage/' . $service->image) : 'https://placehold.co/80' }}" target="_blank">
+                                <img style="width: 80px; height: 80px;" class="rounded"
+                                    alt="service"
+                                    src={{ $service->image ? url('storage/' . $service->image) : 'https://placehold.co/80' }}>
+                            </a>
+                        </td>
                         <td class="text-nowrap">{{ $service->serviceCategory->name }}</td>
-                        <td class="text-nowrap">{{ $service->price_A }}</td>
-                        <td class="text-nowrap">{{ $service->price_B }}</td>
+                        <td class="text-nowrap text-right">{{ $service->price_A }}</td>
+                        <td class="text-nowrap text-right">{{ $service->price_B }}</td>
                         <td class="text-nowrap">
-                            <button wire:click="$dispatch('service-edit', {id:{{ $service->id }}})"
+                            <button
+                                wire:click="$dispatch('service-edit', {id:{{ $service->id }}, categoryId:{{ $service->serviceCategory->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#serviceModal"><i
                                     class="fa fa-pen-to-square me-1"></i>Edit</button>
                             <button type="button"

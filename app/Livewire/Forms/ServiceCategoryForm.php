@@ -18,7 +18,7 @@ class ServiceCategoryForm extends Form
         if (!$this->isEditing) {
             return [
                 'name' => [
-                    'required', 'min:3', 'unique:service_categories'
+                    'required', 'min:3', 'unique:service_categories,name'
                 ]
             ];
         }
