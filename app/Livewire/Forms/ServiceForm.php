@@ -4,8 +4,8 @@ namespace App\Livewire\Forms;
 
 use App\Models\Service;
 use App\Models\ServiceCategory;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ServiceForm extends Form
@@ -17,14 +17,18 @@ class ServiceForm extends Form
 
     public $name = '';
 
+    #[Validate('exists:service_categories,id')]
     public $service_category_id = -1;
 
+    #[Validate('nullable','image', 'max:5120')]
     public $image;
 
     public $db_Image;
 
+    #[Validate('required', 'max:100000', 'numeric', 'min:1', 'gte:price_B')]
     public $price_A = '';
 
+    #[Validate('required', 'max:100000', 'numeric', 'min:1')]
     public $price_B = '';
 
     public function rules()
@@ -40,13 +44,6 @@ class ServiceForm extends Form
                 'service_category_id' => [
                     'exists:service_categories,id'
                 ],
-                'image' => ['nullable', 'image', 'max:5120'],
-                'price_A' => [
-                    'required', 'max:100000', 'numeric', 'min:1', 'gte:price_B'
-                ],
-                'price_B' => [
-                    'required', 'max:100000', 'numeric', 'min:1',
-                ],
             ];
         }
 
@@ -58,16 +55,6 @@ class ServiceForm extends Form
             'name' => [
                 'required', 'min:3',
                 Rule::unique('services')->ignore($this->service->id),
-            ],
-            'service_category_id' => [
-                'exists:service_categories,id'
-            ],
-            'image' => ['nullable','image', 'max:5120'],
-            'price_A' => [
-                'required', 'max:100000', 'numeric', 'min:1', 'gte:price_B'
-            ],
-            'price_B' => [
-                'required', 'max:100000', 'numeric', 'min:1',
             ],
         ];
     }
