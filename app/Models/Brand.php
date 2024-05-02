@@ -15,6 +15,10 @@ class Brand extends Model
         'name'
     ];
 
+    public function items() {
+        return $this->hasMany(Item::class, 'brand_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%");

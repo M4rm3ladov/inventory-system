@@ -15,6 +15,10 @@ class Unit extends Model
         'name'
     ];
 
+    public function items() {
+        return $this->hasMany(Item::class, 'unit_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%");

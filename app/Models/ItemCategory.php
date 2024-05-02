@@ -15,6 +15,10 @@ class ItemCategory extends Model
         'name'
     ];
 
+    public function items() {
+        return $this->hasMany(Item::class, 'item_category_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%");

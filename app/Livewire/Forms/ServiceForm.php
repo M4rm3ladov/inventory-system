@@ -42,7 +42,7 @@ class ServiceForm extends Form
                 ],
                 'image' => ['nullable', 'image', 'max:5120'],
                 'price_A' => [
-                    'required', 'max:100000', 'numeric', 'min:1', 'lte:price_B'
+                    'required', 'max:100000', 'numeric', 'min:1', 'gte:price_B'
                 ],
                 'price_B' => [
                     'required', 'max:100000', 'numeric', 'min:1',
@@ -64,7 +64,7 @@ class ServiceForm extends Form
             ],
             'image' => ['nullable','image', 'max:5120'],
             'price_A' => [
-                'required', 'max:100000', 'numeric', 'min:1', 'lte:price_B'
+                'required', 'max:100000', 'numeric', 'min:1', 'gte:price_B'
             ],
             'price_B' => [
                 'required', 'max:100000', 'numeric', 'min:1',
