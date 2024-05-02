@@ -19,7 +19,7 @@ class ItemForm extends Form
 
     public $name = '';
 
-    #[Validate('required', 'min:3')]
+    #[Validate('required|min:3')]
     public $description = '';
 
     #[Validate('exists:item_categories,id', as: 'category')]
@@ -31,18 +31,18 @@ class ItemForm extends Form
     #[Validate('exists:units,id', as: 'unit')]
     public $unit_id = -1;
 
-    #[Validate('nullable','image', 'max:5120')]
+    #[Validate('nullable|image|max:5120')]
     public $image;
 
     public $db_Image;
 
-    #[Validate('required', 'max:100000', 'numeric', 'min:1')]
+    #[Validate('required|max:100000|numeric|min:1')]
     public $unit_price = '';
 
-    #[Validate('required', 'max:100000', 'numeric', 'min:1', 'gte:price_B')]
+    #[Validate('required|max:100000|numeric|min:1|gte:price_B', as: 'price A' )]
     public $price_A = '';
 
-    #[Validate('required', 'max:100000', 'numeric', 'min:1')]
+    #[Validate('required|max:100000|numeric|min:1', as: 'price B')]
     public $price_B = '';
 
     public function rules()

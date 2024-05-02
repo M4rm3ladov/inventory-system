@@ -1,4 +1,4 @@
-<th scope="col" data-sortable="true" wire:click="setSortBy('{{ $colName }}')">
+<th class="text-nowrap" scope="col" data-sortable="true" wire:click="setSortBy('{{ $colName }}')">
     @if ($sortBy !==  $colName)
         <i class="fa fa-sort mr-1"></i>
     @elseif ($sortDirection == 'ASC')

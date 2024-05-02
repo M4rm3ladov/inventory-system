@@ -20,15 +20,15 @@ class ServiceForm extends Form
     #[Validate('exists:service_categories,id')]
     public $service_category_id = -1;
 
-    #[Validate('nullable','image', 'max:5120')]
+    #[Validate('nullable|image|max:5120')]
     public $image;
 
     public $db_Image;
 
-    #[Validate('required', 'max:100000', 'numeric', 'min:1', 'gte:price_B')]
+    #[Validate('required|max:100000|numeric|min:1|gte:price_B', as: 'price A')]
     public $price_A = '';
 
-    #[Validate('required', 'max:100000', 'numeric', 'min:1')]
+    #[Validate('required|max:100000|numeric|min:1', as: 'price B')]
     public $price_B = '';
 
     public function rules()
@@ -40,9 +40,6 @@ class ServiceForm extends Form
                 ],
                 'name' => [
                     'required', 'min:3', 'unique:services,name'
-                ],
-                'service_category_id' => [
-                    'exists:service_categories,id'
                 ],
             ];
         }
