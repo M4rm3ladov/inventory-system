@@ -123,7 +123,7 @@ class AllServices extends Component
     #[Computed()]
     public function serviceCategories()
     {
-        return ServiceCategory::all();
+        return ServiceCategory::orderBy('name', 'ASC')->get();
     }
 
     #[On('refresh-service')]

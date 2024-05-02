@@ -36,4 +36,11 @@ class Item extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('code', 'like', "%{$value}%")
+            ->orWhere('items.name', 'like', "%{$value}%")
+            ->orWhere('items.description', 'like', "%{$value}%");
+    }
 }
