@@ -95,7 +95,7 @@ class AllServices extends Component
     #[Computed()]
     public function services()
     {
-        $services = Service::search($this->searchQuery)
+        $services = Service::with('serviceCategory')->search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->when($this->category != 'All', function ($query) {
@@ -134,7 +134,7 @@ class AllServices extends Component
 
     public function exportPdf()
     {
-        $services = Service::search($this->searchQuery)
+        $services = Service::with('serviceCategory')->search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->when($this->category != 'All', function ($query) {

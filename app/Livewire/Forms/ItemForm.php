@@ -36,7 +36,7 @@ class ItemForm extends Form
 
     public $db_Image;
 
-    #[Validate('required|max:100000|numeric|min:1')]
+    #[Validate('required|max:100000|numeric|min:1|lte:price_B')]
     public $unit_price = '';
 
     #[Validate('required|max:100000|numeric|min:1|gte:price_B', as: 'price A' )]

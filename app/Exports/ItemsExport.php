@@ -114,7 +114,7 @@ class ItemsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, S
 
     public function query()
     {
-        $items = Item::search($this->searchQuery)
+        $items = Item::with('itemCategory', 'brand', 'unit')->search($this->searchQuery)
             ->select(
                 'items.name AS itemName',
                 'item_categories.name AS categoryName',

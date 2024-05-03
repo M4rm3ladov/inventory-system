@@ -113,7 +113,7 @@ class AllItems extends Component
     #[Computed()]
     public function items()
     {
-        $items = Item::search($this->searchQuery)
+        $items = Item::with('itemCategory', 'brand', 'unit')->search($this->searchQuery)
             ->select(
                 'items.name AS itemName',
                 'item_categories.name AS categoryName',
