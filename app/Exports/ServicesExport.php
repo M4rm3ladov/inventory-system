@@ -91,7 +91,7 @@ class ServicesExport implements FromQuery, WithMapping, WithHeadings, WithStyles
 
     public function query()
     {
-        $services = Service::with('serviceCategory')->search($this->searchQuery)
+        $services = Service::search($this->searchQuery)
             ->select('services.name AS serviceName', 'services.*', 'service_categories.name AS categoryName')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->when($this->category != 'All', function ($query) {
