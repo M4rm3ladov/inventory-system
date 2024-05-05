@@ -1,0 +1,74 @@
+<div>
+    <h4 class="card-title">List of System Users</h4>
+    {{-- action buttons --}}
+    <div class="mt-4">
+        <button data-bs-target="#userModal" type="button" class="btn btn-success" data-bs-toggle="modal">
+            <i class="fa fa-add"></i>
+            <span class="ms-1">Add a New User</span>
+        </button>
+    </div>
+    {{-- table filter --}}
+    @include('system-user.search')
+    {{-- content table --}}
+    <div class="table-scroll-x table-responsive overflow-scroll mt-3" style="height: 500px;">
+        <table class="table-hover table table-striped table-bordered" data-toggle="table" data-search="true"
+            data-show-columns="true">
+            <thead class="sticky-top top-0 z-0">
+                <tr>
+                    <th scope="col" data-sortable="true">#</h>
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'name',
+                        'colDisplay' => 'Name',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'email',
+                        'colDisplay' => 'Email',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'role',
+                        'colDisplay' => 'Role',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'branch',
+                        'colDisplay' => 'Branch',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'created_at',
+                        'colDisplay' => 'Created',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'updated_at',
+                        'colDisplay' => 'Updated',
+                    ])
+                    <th scope="col" data-sortable="true">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($this->users as $user)
+                    <tr wire:key="{{ $user->id }}">
+                        <th scope="row">
+                            {{ ($this->users->currentpage() - 1) * $this->users->perpage() + $loop->index + 1 }}
+                        </th>
+                        <td class="text-nowrap">{{ $user->userName }}</td>
+                        <td class="text-nowrap">{{ $user->email }}</td>
+                        <td class="text-nowrap">{{ $user->roleName }}</td>
+                        <td class="text-nowrap">{{ $user->branchName }}</td>
+                        <td class="text-nowrap">{{ $user->created_at }}</td>
+                        <td class="text-nowrap text-right">{{ $user->updated_at }}</td>
+                        <td class="text-nowrap">
+                            <button
+                                wire:click="$dispatch('user-edit', {id:{{ $user->id }}, roleId:{{ $user->role->id }}, 
+                                branchId:{{ $user->branch->id }}})"
+                                class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#userModal"><i
+                                    class="fa fa-pen-to-square me-1"></i>Edit</button>
+                            <button type="button"
+                                wire:click="$dispatch('delete-prompt', {user:{{ $user }}})"
+                                class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    {{ $this->users->links() }}
+</div>

@@ -22,6 +22,11 @@ class Branch extends Model
         return $this->hasMany(Inventory::class, 'branch_id', 'id');
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class, 'branch_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%")

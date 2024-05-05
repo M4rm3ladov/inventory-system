@@ -26,7 +26,7 @@ class Item extends Model
 
     public function itemCategory()
     {
-        return $this->belongsTo(itemCategory::class);
+        return $this->belongsTo(ItemCategory::class);
     }
 
     public function brand()
