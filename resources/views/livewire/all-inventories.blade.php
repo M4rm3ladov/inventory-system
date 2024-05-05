@@ -48,22 +48,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($this->stocks as $stock)
-                    <tr wire:key="{{ $stock->id }}">
+                @foreach ($this->inventories as $inventory)
+                    <tr wire:key="{{ $inventory->id }}">
                         <th scope="row">
-                            {{ ($this->stocks->currentpage() - 1) * $this->stocks->perpage() + $loop->index + 1 }}
+                            {{ ($this->inventories->currentpage() - 1) * $this->inventories->perpage() + $loop->index + 1 }}
                         </th>
-                        <td class="text-nowrap">{{ $stock->code }}</td>
-                        <td class="text-nowrap">{{ $stock->branch->branchName }}</td>
-                        <td class="text-nowrap">{{ $stock->item->itemName }}</td>
-                        <td class="text-nowrap">{{ $stock->item->description }}</td>
-                        <td class="text-nowrap">{{ $stock->item->brandName }}</td>
-                        <td class="text-nowrap">{{ $stock->item->categoryName }}</td>
-                        <td class="text-nowrap">{{ $stock->item->unitName }}</td>
+                        <td class="text-nowrap">{{ $inventory->code }}</td>
+                        <td class="text-nowrap">{{ $inventory->branchName }}</td>
+                        <td class="text-nowrap">{{ $inventory->itemName }}</td>
+                        <td class="text-nowrap">{{ $inventory->description }}</td>
+                        <td class="text-nowrap">{{ $inventory->brandName }}</td>
+                        <td class="text-nowrap">{{ $inventory->categoryName }}</td>
+                        <td class="text-nowrap">{{ $inventory->unitName }}</td>
                         <td class="text-nowrap">
                             <button
-                                wire:click="$dispatch('item-edit', {id:{{ $stock->item->id }}, categoryId:{{ $item->itemCategory->id }}, 
-                                brandId:{{ $stock->item->brand->id }}, unitId:{{ $stock->item->unit->id }}})"
+                                wire:click="$dispatch('item-edit', {id:{{ $inventory->item->id }}, categoryId:{{ $item->itemCategory->id }}, 
+                                brandId:{{ $inventory->item->brand->id }}, unitId:{{ $inventory->item->unit->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal"><i
                                     class="fa fa-pen-to-square me-1"></i>Edit</button>
                             <button type="button"33333
@@ -75,5 +75,5 @@
             </tbody>
         </table>
     </div>
-    {{ $this->stocks->links() }}
+    {{ $this->inventories->links() }}
 </div>

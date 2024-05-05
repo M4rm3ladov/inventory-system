@@ -25,11 +25,11 @@
         <label class="my-auto text-nowrap">Branch:</label>
         <select wire:model.live="branch" wire:change="filterChange" class="form-select form-select ms-2">
             <option value="All" selected>All</option>
-            {{-- @foreach ($this->branches as $branch)
+            @foreach ($this->branches as $branch)
                 <option value="{{ $branch->name }}">
                     {{ $branch->name }}
                 </option>
-            @endforeach --}}
+            @endforeach
         </select>
     </div>  
     <div class="ms-auto" style="width: 800px">
@@ -38,33 +38,33 @@
                 <label class="my-auto text-nowrap">Category:</label>
                 <select wire:model.live="category" wire:change="filterChange" class="form-select form-select ms-2">
                     <option value="All" selected>All</option>
-                    {{-- @foreach ($this->itemCategories as $itemCategory)
+                    @foreach ($this->itemCategories as $itemCategory)
                         <option value="{{ $itemCategory->name }}">
                             {{ $itemCategory->name }}
                         </option>
-                    @endforeach --}}
+                    @endforeach
                 </select>
             </div>
             <div class="col d-flex flex-row ms-2">
                 <label class="my-auto text-nowrap">Brand:</label>
                 <select wire:model.live="brand" wire:change="filterChange" class="form-select form-select ms-2">
                     <option value="All" selected>All</option>
-                    {{-- @foreach ($this->brands as $brand)
+                    @foreach ($this->brands as $brand)
                         <option value="{{ $brand->name }}">
                             {{ $brand->name }}
                         </option>
-                    @endforeach --}}
+                    @endforeach
                 </select>
             </div>
             <div class="col d-flex flex-row ms-2 ps-0">
                 <label class="my-auto text-nowrap">Unit:</label>
                 <select wire:model.live="unit" wire:change="filterChange" class="form-select form-select ms-2">
                     <option value="All" selected>All</option>
-                    {{-- @foreach ($this->units as $unit)
+                    @foreach ($this->units as $unit)
                         <option value="{{ $unit->name }}">
                             {{ $unit->name }}
                         </option>
-                    @endforeach --}}
+                    @endforeach
                 </select>
             </div>
         </div>

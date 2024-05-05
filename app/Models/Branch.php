@@ -18,6 +18,10 @@ class Branch extends Model
         'address',
     ];
 
+    public function inventories() {
+        return $this->hasMany(Inventory::class, 'branch_id', 'id');
+    }
+
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%")
