@@ -2,10 +2,7 @@
 
 namespace App\Livewire\Forms;
 
-use App\Models\Brand;
 use App\Models\Item;
-use App\Models\ItemCategory;
-use App\Models\Unit;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -70,12 +67,9 @@ class ItemForm extends Form
         ];
     }
 
-    public function setItem($id, $categoryId, $brandId, $unitId)
+    public function setItem($id)
     {
         $this->item = Item::findOrfail($id);
-        $this->item_category_id = ItemCategory::findOrfail($categoryId);
-        $this->brand_id = Brand::findOrfail($brandId);
-        $this->unit_id = Unit::findOrfail($unitId);
 
         $this->code = $this->item->code;
         $this->name = $this->item->name;

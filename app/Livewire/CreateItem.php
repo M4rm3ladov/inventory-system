@@ -66,10 +66,10 @@ class CreateItem extends Component
     }
 
     #[On('item-edit')]
-    public function edit($id, $categoryId, $brandId, $unitId)
+    public function edit($id)
     {
         $this->form->isEditing = $this->isEditing = true;
-        $this->form->setItem($id, $categoryId, $brandId, $unitId);
+        $this->form->setItem($id);
     }
 
     #[On('item-delete')]

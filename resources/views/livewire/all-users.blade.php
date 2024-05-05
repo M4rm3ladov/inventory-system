@@ -72,3 +72,30 @@
     </div>
     {{ $this->users->links() }}
 </div>
+@script
+    <script>
+        $wire.on('delete-prompt', (event) => {
+            swal.fire({
+                title: 'Are you sure?',
+                html: "You're about to delete <strong>" + event.user.first_name.concat(" ", event.user.last_name) +
+                    "</strong>. This action is permanent!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#C82333',
+                cancelButtonColor: '#5A6268',
+                confirmButtonText: 'Delete record'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $wire.dispatch('user-delete', {
+                        id: event.user.id
+                    })
+                }
+            })
+        })
+
+        var modal = document.getElementById('userModal')
+        modal.addEventListener('hidden.bs.modal', (event) => {
+            $wire.dispatch('reset-modal')
+        })
+    </script>
+@endscript

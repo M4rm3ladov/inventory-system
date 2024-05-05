@@ -81,8 +81,7 @@
                         <td class="text-nowrap text-right">{{ $item->price_B }}</td>
                         <td class="text-nowrap">
                             <button
-                                wire:click="$dispatch('item-edit', {id:{{ $item->id }}, categoryId:{{ $item->itemCategory->id }}, 
-                                brandId:{{ $item->brand->id }}, unitId:{{ $item->unit->id }}})"
+                                wire:click="$dispatch('item-edit', {id:{{ $item->id }}})"
                                 class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal"><i
                                     class="fa fa-pen-to-square me-1"></i>Edit</button>
                             <button type="button"
