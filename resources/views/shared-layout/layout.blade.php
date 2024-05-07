@@ -21,25 +21,29 @@
 <body>
     <div class="container-fluid">
         <div class="row vh-100">
-            {{-- side navigation --}}
-            @include('shared-layout.side-nav')
-            {{-- content column --}}
-            <div class="content-container col-sm-12 col-md-10 no-gutters">
-                {{-- nav & current account  --}}
-                @include('shared-layout.nav')
-                {{-- content --}}
-                @if (Route::is(['dashboard', 'stock-in']))
-                    @yield('content')
-                @else
-                    <div class="container-fluid py-3">
-                        <div class="card" style="width: 100%">
-                            <div class="card-body">
-                                @yield('content')
+            @if (Route::is('login'))
+                @yield('content')
+            @else
+                {{-- side navigation --}}
+                @include('shared-layout.side-nav')
+                {{-- content column --}}
+                <div class="content-container col-sm-12 col-md-10 no-gutters">
+                    {{-- nav & current account  --}}
+                    @include('shared-layout.nav')
+                    {{-- content --}}
+                    @if (Route::is(['dashboard', 'stock-in']))
+                        @yield('content')
+                    @else
+                        <div class="container-fluid py-3">
+                            <div class="card" style="width: 100%">
+                                <div class="card-body">
+                                    @yield('content')
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endif
-            </div>
+                    @endif
+                </div>
+            @endif
         </div>
     </div>
 

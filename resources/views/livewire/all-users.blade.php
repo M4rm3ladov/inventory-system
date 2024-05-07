@@ -2,10 +2,10 @@
     <h4 class="card-title">List of System Users</h4>
     {{-- action buttons --}}
     <div class="mt-4">
-        <button data-bs-target="#userModal" type="button" class="btn btn-success" data-bs-toggle="modal">
+        <a href="{{ route('register') }}" role="button" class="btn btn-success">
             <i class="fa fa-add"></i>
             <span class="ms-1">Add a New User</span>
-        </button>
+        </a>
     </div>
     {{-- table filter --}}
     @include('system-user.search')
@@ -56,11 +56,9 @@
                         <td class="text-nowrap">{{ $user->created_at }}</td>
                         <td class="text-nowrap text-right">{{ $user->updated_at }}</td>
                         <td class="text-nowrap">
-                            <button
-                                wire:click="$dispatch('user-edit', {id:{{ $user->id }}, roleId:{{ $user->role->id }}, 
-                                branchId:{{ $user->branch->id }}})"
-                                class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#userModal"><i
-                                    class="fa fa-pen-to-square me-1"></i>Edit</button>
+                            <a  href="{{ route('users.edit', $user->id) }}"
+                                class="btn btn-sm btn-primary" ><i
+                                    class="fa fa-pen-to-square me-1"></i>Edit</a>
                             <button type="button"
                                 wire:click="$dispatch('delete-prompt', {user:{{ $user }}})"
                                 class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>

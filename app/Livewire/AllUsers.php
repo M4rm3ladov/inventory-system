@@ -99,7 +99,7 @@ class AllUsers extends Component
     {
         $users = User::search($this->searchQuery)
             ->select(
-                DB::raw("CONCAT(users.first_name, ' ', users.mi, ' ' , users.last_name, users.suffix) as userName"),
+                DB::raw("CONCAT(users.first_name, ' ', IFNULL(CONCAT(users.mi), ''), ' ' , users.last_name, IFNULL(CONCAT(users.suffix),'')) as userName"),
                 'branches.name AS branchName',
                 'roles.name AS roleName',
                 'users.*',

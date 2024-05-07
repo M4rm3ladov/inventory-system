@@ -19,6 +19,9 @@ class CreateUser extends Component
 
     public function store() {
         $this->validate();
+        if ($this->isEditing) {
+            
+        }
         $this->form->password = Hash::make($this->form->password);
         User::create($this->form->all());
 
@@ -73,6 +76,7 @@ class CreateUser extends Component
     }
 
     public function resetInputs() {
+        $this->isPassVisible = false;
         $this->form->resetInputs();
     }
 

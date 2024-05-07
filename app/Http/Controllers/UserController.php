@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Branch;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,14 +22,41 @@ class UserController extends Controller
         return view('system-user.user');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function register()
     {
-        //
+        $branches = Branch::orderBy('name', 'ASC')->get();
+        $roles = Role::orderBy('name', 'ASC')->get();
+        return view('system-user.register', ['branches' => $branches, 'roles' => $roles]);
+    }
+
+    public function authenticate(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (auth()->attempt($validated)) {
+            request()->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->route('login')->withErrors(['email' => 'Username or password incorrect']);
+    }
+
+    public function login()
+    {
+        return view('system-user.login');
+    }
+
+    public function logout() 
+    {
+        auth()->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerate();
+
+        return redirect()->route('login');
     }
 
     /**
@@ -32,20 +65,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $validated['password'] = Hash::make($validated['password']);
+        User::create($validated);
+
+        return redirect()->route('register')->with('success', 'Account created successfully!');
     }
 
     /**
@@ -54,9 +81,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $branches = Branch::orderBy('name', 'ASC')->get();
+        $roles = Role::orderBy('name', 'ASC')->get();
+        return view('system-user.user-edit', compact('user', 'branches', 'roles'));
     }
 
     /**
@@ -66,9 +95,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $validated = $request->validated();
+        
+        $user->update($validated);
+
+        return redirect()->route('users');
     }
 
     /**

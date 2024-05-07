@@ -42,6 +42,9 @@ class UserForm extends Form
                 'email' => [
                     'required', 'unique:users,email', 'email'
                 ],
+                'password' => [
+                    'sometimes', 'min:6',
+                ]
             ];
         }
 
@@ -50,6 +53,9 @@ class UserForm extends Form
                 'required', 'email',
                 Rule::unique('users')->ignore($this->user->id),
             ],
+            'password' => [
+                'sometimes', 'min:6',
+            ]
         ];
     }
 

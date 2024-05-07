@@ -15,7 +15,6 @@ use App\Http\Controllers\StockReturnController;
 use App\Http\Controllers\StockTransferController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,34 +30,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/item', [ItemController::class, 'index'])->name('item');
+//items
+Route::group(['prefix' => 'item', 'as' => 'item', 'middleware' => ['auth', 'can:admin']], function() {
+    Route::get('', [ItemController::class, 'index'])->name('');
+    
+    Route::get('/unit', [UnitController::class, 'index'])->name('-unit');
+    
+    Route::get('/brand', [BrandController::class, 'index'])->name('-brand');
+    
+    Route::get('/category', [ItemCategoryController::class, 'index'])->name('-category');
+});
 
-Route::get('/item/unit', [UnitController::class, 'index'])->name('item-unit');
+//services
+Route::group(['prefix' => 'service', 'middleware' => ['auth', 'can:admin']], function() {
+    Route::get('', [ServiceController::class, 'index'])->name('service');
+    
+    Route::get('category', [ServiceCategoryController::class, 'index'])->name('service-category');
+});
 
-Route::get('/item/brand', [BrandController::class, 'index'])->name('item-brand');
+Route::get('/branch', [BranchController::class, 'index'])->name('branch')->middleware(['auth', 'can:admin']);
 
-Route::get('/item/category', [ItemCategoryController::class, 'index'])->name('item-category');
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier')->middleware(['auth', 'can:admin']);
 
-Route::get('/service', [ServiceController::class, 'index'])->name('service');
+//inventories
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware(['auth', 'can:admin']);
+Route::group(['as' => 'stock-', 'middleware' => ['auth', 'can:manager']], function() {
+    Route::get('/stock-in', [StockInController::class, 'index'])->name('in');
+    
+    Route::get('/stock-return', [StockReturnController::class, 'index'])->name('return');
+    
+    Route::get('/stock-transfer', [StockTransferController::class, 'index'])->name('transfer');
+    
+    Route::get('/stock-out', [StockOutController::class, 'index'])->name('out');
+    
+    Route::get('/stock-count', [StockCountController::class, 'index'])->name('count');
+});
 
-Route::get('/service/category', [ServiceCategoryController::class, 'index'])->name('service-category');
-
-Route::get('/branch', [BranchController::class, 'index'])->name('branch');
-
-Route::post('/branch/create', [BranchController::class, 'store'])->name('branch.create');
-
-Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
-
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
-
-Route::get('/stock-in', [StockInController::class, 'index'])->name('stock-in');
-
-Route::get('/stock-return', [StockReturnController::class, 'index'])->name('stock-return');
-
-Route::get('/stock-transfer', [StockTransferController::class, 'index'])->name('stock-transfer');
-
-Route::get('/stock-out', [StockOutController::class, 'index'])->name('stock-out');
-
-Route::get('/stock-count', [StockCountController::class, 'index'])->name('stock-count');
-
-Route::get('/user', [UserController::class, 'index'])->name('user');
