@@ -9,9 +9,9 @@ Route::group(['middleware' => ['auth', 'can:admin']], function () {
 
     Route::post('/register', [UserController::class, 'store']);
 
-    Route::get('change-password/{user}/edit', [UserController::class, 'changePassword'])->name('change-password.edit');
+    Route::get('/credential/{user}/edit', [UserController::class, 'editCredential'])->name('credential.edit');
 
-    Route::put('change-password/{user}', [UserController::class, 'changePassword'])->name('change-password.update');
+    Route::put('/credential/{user}', [UserController::class, 'updateCredential'])->name('credential.update');
 
     Route::group(['prefix' => 'users', 'as' => 'users'], function () {
         Route::get('', [UserController::class, 'index'])->name('');

@@ -3,6 +3,7 @@
 @section('content')
     <div class="container-fluid pt-3">
         <div class="row row-cols-sm-1 row-cols-md-5 g-3 h-100">
+            @can('admin')
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
@@ -99,6 +100,8 @@
                     </div>
                 </div>
             </div>
+            @endcan
+            @can('manager')
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
@@ -195,6 +198,7 @@
                     </div>
                 </div>
             </div>
+            @endcan
         </div>
     </div>
 @endsection

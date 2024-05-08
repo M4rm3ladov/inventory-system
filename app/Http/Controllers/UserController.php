@@ -101,7 +101,22 @@ class UserController extends Controller
         
         $user->update($validated);
 
-        return redirect()->route('users');
+        return redirect()->route('users.edit', $user->id)->with('success', 'Account updated successfully!');
+    }
+
+    public function editCredential(User $user) {
+        return view('system-user.credential-edit', compact('user'));
+    }
+
+    public function updateCredential(User $user) {
+        $validated = request()->validate([
+            'password' => 'required|confirmed|min:6', 
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']);
+        $user->update($validated);
+
+        return redirect()->route('users.edit', $user->id)->with('success', 'Password changed successfully!');
     }
 
     /**
