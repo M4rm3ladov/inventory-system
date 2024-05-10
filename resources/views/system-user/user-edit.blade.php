@@ -84,7 +84,7 @@
             <div class="row mt-4">
                 <div class="d-flex flex-row">
                     <a href="{{ route('users') }}" type="submit" class="ms-auto btn btn-danger">Back</a>
-                    <a href="{{ route('credential.edit', $user->id) }}" role="button" class="btn btn-primary ms-2">Change Password</a>
+                    <a href="{{ route('users.credential.edit', $user->id) }}" role="button" class="btn btn-primary ms-2">Change Password</a>
                     <button type="submit" class="btn btn-success ms-2">Update</button>
                 </div>
             </div>

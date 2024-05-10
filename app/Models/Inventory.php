@@ -10,6 +10,16 @@ class Inventory extends Model
     use HasFactory;
     use \Znck\Eloquent\Traits\BelongsToThrough;
 
+    protected $fillable = [
+        'item_id',
+        'branch_id',
+        'quantity',
+    ]; 
+
+    public function stockIns() {
+        return $this->hasMany(StockIn::class);
+    }
+
     public function itemCategory()
     {
         return $this->belongsToThrough(ItemCategory::class, Item::class);

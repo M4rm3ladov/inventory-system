@@ -9,16 +9,16 @@ Route::group(['middleware' => ['auth', 'can:admin']], function () {
 
     Route::post('/register', [UserController::class, 'store']);
 
-    Route::get('/credential/{user}/edit', [UserController::class, 'editCredential'])->name('credential.edit');
-
-    Route::put('/credential/{user}', [UserController::class, 'updateCredential'])->name('credential.update');
-
     Route::group(['prefix' => 'users', 'as' => 'users'], function () {
         Route::get('', [UserController::class, 'index'])->name('');
 
         Route::get('{user}/edit', [UserController::class, 'edit'])->name('.edit');
 
         Route::put('{user}', [UserController::class, 'update'])->name('.update');
+
+        Route::get('credential/{user}/edit', [UserController::class, 'editCredential'])->name('.credential.edit');
+
+        Route::put('credential/{user}', [UserController::class, 'updateCredential'])->name('.credential.update');
     });
 });
 

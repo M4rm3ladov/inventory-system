@@ -31,29 +31,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 //items
-Route::group(['prefix' => 'item', 'as' => 'item', 'middleware' => ['auth', 'can:admin']], function() {
+Route::group(['prefix' => 'items', 'as' => 'items', 'middleware' => ['auth', 'can:admin']], function() {
     Route::get('', [ItemController::class, 'index'])->name('');
     
-    Route::get('/unit', [UnitController::class, 'index'])->name('-unit');
+    Route::get('/units', [UnitController::class, 'index'])->name('.units');
     
-    Route::get('/brand', [BrandController::class, 'index'])->name('-brand');
+    Route::get('/brands', [BrandController::class, 'index'])->name('.brands');
     
-    Route::get('/category', [ItemCategoryController::class, 'index'])->name('-category');
+    Route::get('/categories', [ItemCategoryController::class, 'index'])->name('.categories');
 });
 
 //services
-Route::group(['prefix' => 'service', 'middleware' => ['auth', 'can:admin']], function() {
-    Route::get('', [ServiceController::class, 'index'])->name('service');
+Route::group(['prefix' => 'services', 'middleware' => ['auth', 'can:admin']], function() {
+    Route::get('', [ServiceController::class, 'index'])->name('services');
     
-    Route::get('category', [ServiceCategoryController::class, 'index'])->name('service-category');
+    Route::get('categories', [ServiceCategoryController::class, 'index'])->name('services.categories');
 });
 
-Route::get('/branch', [BranchController::class, 'index'])->name('branch')->middleware(['auth', 'can:admin']);
+Route::get('/branches', [BranchController::class, 'index'])->name('branches')->middleware(['auth', 'can:admin']);
 
-Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier')->middleware(['auth', 'can:admin']);
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware(['auth', 'can:admin']);
 
 //inventories
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware(['auth', 'can:admin']);
+Route::get('/inventories', [InventoryController::class, 'index'])->name('inventories')->middleware(['auth', 'can:manager']);
 Route::group(['as' => 'stock-', 'middleware' => ['auth', 'can:manager']], function() {
     Route::get('/stock-in', [StockInController::class, 'index'])->name('in');
     

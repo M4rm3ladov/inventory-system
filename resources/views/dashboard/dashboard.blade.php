@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
+                        <a href="{{ route('items') }}" class="text-decoration-none">More Info</a>
                     </div>
                 </div>
             </div>
@@ -26,29 +26,13 @@
                         <div class="d-flex flex-row justify-content-between">
                             <div>
                                 <h1 class="card-title">0</h5>
-                                    <p class="card-text">Service</p>
-                            </div>
-                            <i class="fa fa-toolbox fa-4x"></i>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex flex-row justify-content-between">
-                            <div>
-                                <h1 class="card-title">0</h5>
-                                    <p class="card-text">Category</p>
+                                    <p class="card-text">Item Category</p>
                             </div>
                             <i class="fa fa-network-wired fa-4x"></i>
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
+                        <a href="{{ route('items.categories') }}" class="text-decoration-none">More Info</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +48,55 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
+                        <a href="{{ route('items.brands') }}" class="text-decoration-none">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div>
+                                <h1 class="card-title">0</h5>
+                                    <p class="card-text">Unit</p>
+                            </div>
+                            <i class="fa fa-scale-balanced fa-4x"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('items.units') }}" class="text-decoration-none">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div>
+                                <h1 class="card-title">0</h5>
+                                    <p class="card-text">Service</p>
+                            </div>
+                            <i class="fa fa-toolbox fa-4x"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('services') }}" class="text-decoration-none">More Info</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div>
+                                <h1 class="card-title">0</h5>
+                                    <p class="card-text">Service Category</p>
+                            </div>
+                            <i class="fa fa-network-wired fa-4x"></i>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('services.categories') }}" class="text-decoration-none">More Info</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +112,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
+                        <a href="{{ route('branches') }}" class="text-decoration-none">More Info</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +128,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="text-decoration-none" href="">More Info</a>
+                        <a href="{{ route('suppliers') }}" class="text-decoration-none">More Info</a>
                     </div>
                 </div>
             </div>
@@ -182,6 +214,8 @@
                     </div>
                 </div>
             </div>
+            @endcan
+            @can('admin')
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">

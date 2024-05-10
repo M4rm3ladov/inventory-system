@@ -20,25 +20,25 @@
                     </a>
                     <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="productmenu" data-bs-parent="#menu">
                         <li class="nav-item">
-                            <a href="{{ route('item') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('items') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-cart-shopping"></i>
                                 <span class="ms-2">Item</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('item-category') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('items.categories') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-network-wired"></i>
                                 <span class="ms-2">Category</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('item-brand') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('items.brands') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-tag"></i>
                                 <span class="ms-2">Brand</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('item-unit') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('items.units') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-scale-balanced"></i>
                                 <span class="ms-2">Unit</span>
                             </a>
@@ -54,13 +54,13 @@
                     </a>
                     <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="servicemenu" data-bs-parent="#menu">
                         <li class="nav-item">
-                            <a href="{{ route('service') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('services') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-wrench"></i>
                                 <span class="ms-2">Item</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('service-category') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('services.categories') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-network-wired"></i>
                                 <span class="ms-2">Category</span>
                             </a>
@@ -68,13 +68,13 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('branch') }}" class="nav-link text-white" aria-current="page">
+                    <a href="{{ route('branches') }}" class="nav-link text-white" aria-current="page">
                         <i class="fa fa-building"></i>
                         <span class="ms-2">Branch</span>
                     </a>
                 </li>
                 <li class="nav-item text-white">
-                    <a href="{{ route('supplier') }}" class="nav-link text-white" aria-current="page">
+                    <a href="{{ route('suppliers') }}" class="nav-link text-white" aria-current="page">
                         <i class="fa fa-truck"></i>
                         <span class="ms-2">Supplier</span>
                     </a>
@@ -90,7 +90,7 @@
                     <ul class="nav collapse collapse-horizontal ms-1 flex-column" id="product-stock"
                         data-bs-parent="#menu">
                         <li class="nav-item">
-                            <a href="{{ route('inventory') }}" class="nav-link text-white" aria-current="page">
+                            <a href="{{ route('inventories') }}" class="nav-link text-white" aria-current="page">
                                 <i class="fa fa-dolly"></i>
                                 <span class="m-2">Stock On Hand</span>
                             </a>

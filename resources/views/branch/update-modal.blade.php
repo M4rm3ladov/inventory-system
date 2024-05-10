@@ -5,7 +5,7 @@
                 <h1 class="modal-title fs-5" id="editBranchModalLabel">Edit Branch</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('branch') }}" method="POST">
+            <form action="{{ route('branches') }}" method="POST">
                 <div class="modal-body">
                     <label class="my-auto me-2" name="name">Name:</label>
                     <input type="text" class="form-control mb-2">

@@ -4,7 +4,7 @@
 <div>
     @include('shared-layout.success-message')
     <h4 class="card-title">Edit Password</h4>
-    <form class="mt-4" method="POST" action="{{ route('credential.update', $user->id) }}">
+    <form class="mt-4" method="POST" action="{{ route('users.credential.update', $user->id) }}">
         @csrf
         @method('put')
         <div class="row">
