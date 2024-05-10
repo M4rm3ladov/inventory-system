@@ -102,6 +102,7 @@ class CreateStockIn extends Component
 
     public function resetInputs() {
         $this->form->resetInputs();
+        $this->dispatch('reset-item-search');
     }
 
     #[On('reset-modal')]

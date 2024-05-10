@@ -37,6 +37,7 @@ class SearchItem extends Component
     #[On('reset-item-search')]
     public function resetSearch() {
         $this->reset();
+        $this->resetValidation();
     }
 
     #[On('populate-item-search')]

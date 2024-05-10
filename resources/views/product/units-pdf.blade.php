@@ -8,12 +8,11 @@
 </head>
 <body>
     <h1>Product Units Details</h1>
-    <table class="table-hover table table-striped table-bordered" data-toggle="table" data-search="true"
-            data-show-columns="true">
-            <thead class="sticky-top top-0 z-0">
+    <table>
+            <thead>
                 <tr>
-                    <th scope="col" data-sortable="true">#</th>
-                    <th scope="col" data-sortable="true">Name</th>
+                    <th>#</th>
+                    <th>Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,3 +26,20 @@
         </table>
 </body>
 </html>
+<style>
+    @page {
+        size: A4 portrait;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    th {
+        padding: 0 2px;
+    }
+
+    table th, td{
+        border: 1px solid;
+    }
+</style>

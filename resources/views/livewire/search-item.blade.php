@@ -2,7 +2,8 @@
     <label class="me-1 form-label">Item:</label>
     <input type="text" class="form-control @error('searchQuery') is-invalid  @enderror"
         wire:model.live.debounce.300ms="searchQuery">
-    <ul wire:loading class="list-group position-absolute z-10 shadow-sm bg-body-tertiary rounded w-100">
+    <ul wire:loading wire:target="searchQuery"
+        class="list-group position-absolute z-10 shadow-sm bg-body-tertiary rounded w-100">
         <li class="list-group-item">Searching...</li>
     </ul>
     @if (!empty($searchQuery))
@@ -10,7 +11,8 @@
             @foreach ($this->items as $item)
                 <li class="list-group-item" wire:key="{{ $item->id }}"
                     wire:click="populateItem({{ $item }})">
-                    {{ $item->details }}
+                    <a class="text-decoration-none text-black link-primary" href="#" onClick="return false;"
+                        aria-disabled="true">{{ $item->details }}</a>
                 </li>
             @endforeach
         </ul>
