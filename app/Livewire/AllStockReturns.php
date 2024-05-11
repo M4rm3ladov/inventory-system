@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Exports\StockReturnsExport;
 use App\Models\Brand;
 use App\Models\ItemCategory;
 use App\Models\StockReturn;
 use App\Models\Supplier;
 use App\Models\Unit;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -189,66 +191,66 @@ class AllStockReturns extends Component
         return view('livewire.all-stock-returns');
     }
 
-    // public function exportPdf()
-    // {
-    //     $stockIns = StockIn::search($this->searchQuery)
-    //         ->select(
-    //             'suppliers.name AS supplierName',
-    //             'items.name AS itemName',
-    //             'item_categories.name AS categoryName',
-    //             'brands.name AS brandName',
-    //             'units.name AS unitName',
-    //             'items.*',
-    //             'stock_ins.created_at AS createdAt',
-    //             'stock_ins.updated_at AS updatedAt',
-    //             'stock_ins.*'
-    //         )
-    //         ->join('suppliers', 'stock_ins.supplier_id', '=', 'suppliers.id')
-    //         ->join('inventories', 'stock_ins.inventory_id', '=', 'inventories.id')
-    //         ->join('items', 'inventories.item_id', '=', 'items.id')
-    //         ->join('item_categories', 'items.item_category_id', '=', 'item_categories.id')
-    //         ->join('brands', 'items.brand_id', '=', 'brands.id')
-    //         ->join('units', 'items.unit_id', '=', 'units.id')
-    //         ->when($this->supplier != 'All', function ($query) {
-    //             $query->where('suppliers.name', $this->supplier);
-    //         })
-    //         ->when($this->category != 'All', function ($query) {
-    //             $query->where('item_categories.name', $this->category);
-    //         })
-    //         ->when($this->brand != 'All', function ($query) {
-    //             $query->where('brands.name', $this->brand);
-    //         })
-    //         ->when($this->unit != 'All', function ($query) {
-    //             $query->where('units.name', $this->unit);
-    //         })
-    //         ->when($this->dateFrom && $this->dateTo != '', function ($query) {
-    //             $query->whereBetween('transact_date', [$this->dateFrom, $this->dateTo]);
-    //         })
-    //         ->where('inventories.branch_id', '=', Auth::user()->branch_id)
-    //         ->get()
-    //         ->toArray();
+    public function exportPdf()
+    {
+        $stockReturns = StockReturn::search($this->searchQuery)
+            ->select(
+                'suppliers.name AS supplierName',
+                'items.name AS itemName',
+                'item_categories.name AS categoryName',
+                'brands.name AS brandName',
+                'units.name AS unitName',
+                'items.*',
+                'stock_returns.created_at AS createdAt',
+                'stock_returns.updated_at AS updatedAt',
+                'stock_returns.*'
+            )
+            ->join('suppliers', 'stock_returns.supplier_id', '=', 'suppliers.id')
+            ->join('inventories', 'stock_returns.inventory_id', '=', 'inventories.id')
+            ->join('items', 'inventories.item_id', '=', 'items.id')
+            ->join('item_categories', 'items.item_category_id', '=', 'item_categories.id')
+            ->join('brands', 'items.brand_id', '=', 'brands.id')
+            ->join('units', 'items.unit_id', '=', 'units.id')
+            ->when($this->supplier != 'All', function ($query) {
+                $query->where('suppliers.name', $this->supplier);
+            })
+            ->when($this->category != 'All', function ($query) {
+                $query->where('item_categories.name', $this->category);
+            })
+            ->when($this->brand != 'All', function ($query) {
+                $query->where('brands.name', $this->brand);
+            })
+            ->when($this->unit != 'All', function ($query) {
+                $query->where('units.name', $this->unit);
+            })
+            ->when($this->dateFrom && $this->dateTo != '', function ($query) {
+                $query->whereBetween('transact_date', [$this->dateFrom, $this->dateTo]);
+            })
+            ->where('inventories.branch_id', '=', Auth::user()->branch_id)
+            ->get()
+            ->toArray();
 
-    //     $pdf = Pdf::loadView('product-stock.stock-in.stock-ins-pdf', ['stockIns' => $stockIns]);
+        $pdf = Pdf::loadView('product-stock.stock-return.stock-returns-pdf', ['stockReturns' => $stockReturns]);
 
-    //     return response()->streamDownload(function () use ($pdf) {
-    //         echo $pdf->stream();
-    //     }, 'stockIns.pdf');
-    // }
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'stockReturns.pdf');
+    }
 
-    // public function exportExcel()
-    // {
-    //     return (new StockInsExport(
-    //         $this->searchQuery,
-    //         $this->sortBy,
-    //         $this->sortDirection,
-    //         $this->supplier,
-    //         $this->category,
-    //         $this->brand,
-    //         $this->unit,
-    //         $this->dateFrom,
-    //         $this->dateTo,
-    //     ))->download('stockIns.xls');
-    // }
+    public function exportExcel()
+    {
+        return (new StockReturnsExport(
+            $this->searchQuery,
+            $this->sortBy,
+            $this->sortDirection,
+            $this->supplier,
+            $this->category,
+            $this->brand,
+            $this->unit,
+            $this->dateFrom,
+            $this->dateTo,
+        ))->download('stockReturns.xls');
+    }
 
     public function updatedSearchQuery()
     {

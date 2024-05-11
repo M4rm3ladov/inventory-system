@@ -46,7 +46,7 @@ class CreateStockReturn extends Component
 
         $this->dispatch('stock-return-created', [
             'title' => 'Success!',
-            'text' => 'Stock in record saved successfully!',
+            'text' => 'Stock return record saved successfully!',
             'icon' => 'success',
         ]);
 
@@ -68,7 +68,7 @@ class CreateStockReturn extends Component
 
         $this->dispatch('stock-return-created', [
             'title' => 'Success!',
-            'text' => 'Stock in record saved successfully!',
+            'text' => 'Stock return record saved successfully!',
             'icon' => 'success',
         ]);
 
