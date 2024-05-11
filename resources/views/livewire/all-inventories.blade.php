@@ -5,7 +5,7 @@
         @include('shared-layout.export-buttons')
     </div>
     {{-- table filter --}}
-    @include('product-stock.search')
+    @include('product-stock.stock-on-hand.search')
     {{-- content table --}}
     <div class="table-scroll-x table-responsive overflow-scroll mt-3" style="height: 500px;">
         <table class="table-hover table table-striped table-bordered" data-toggle="table" data-search="true"
@@ -16,6 +16,10 @@
                     @include('shared-layout.table-sortable-th', [
                         'colName' => 'branch',
                         'colDisplay' => 'Branch',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'quantity',
+                        'colDisplay' => 'Qty',
                     ])
                     @include('shared-layout.table-sortable-th', [
                         'colName' => 'code',
@@ -34,16 +38,20 @@
                         'colDisplay' => 'Brand',
                     ])
                     @include('shared-layout.table-sortable-th', [
-                        'colName' => 'quantity',
-                        'colDisplay' => 'Quantity',
-                    ])
-                    @include('shared-layout.table-sortable-th', [
                         'colName' => 'category',
                         'colDisplay' => 'Category',
                     ])
                     @include('shared-layout.table-sortable-th', [
                         'colName' => 'unit',
                         'colDisplay' => 'Unit',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'created_at',
+                        'colDisplay' => 'Created Date',
+                    ])
+                    @include('shared-layout.table-sortable-th', [
+                        'colName' => 'updated_at',
+                        'colDisplay' => 'Updated Date',
                     ])
                 </tr>
             </thead>
@@ -53,23 +61,16 @@
                         <th scope="row">
                             {{ ($this->inventories->currentpage() - 1) * $this->inventories->perpage() + $loop->index + 1 }}
                         </th>
-                        <td class="text-nowrap">{{ $inventory->code }}</td>
                         <td class="text-nowrap">{{ $inventory->branchName }}</td>
+                        <td class="text-center">{{ $inventory->quantity }}</td>
+                        <td class="text-nowrap">{{ $inventory->code }}</td>
                         <td class="text-nowrap">{{ $inventory->itemName }}</td>
                         <td class="text-nowrap">{{ $inventory->description }}</td>
                         <td class="text-nowrap">{{ $inventory->brandName }}</td>
                         <td class="text-nowrap">{{ $inventory->categoryName }}</td>
                         <td class="text-nowrap">{{ $inventory->unitName }}</td>
-                        <td class="text-nowrap">
-                            <button
-                                wire:click="$dispatch('item-edit', {id:{{ $inventory->item->id }}, categoryId:{{ $item->itemCategory->id }}, 
-                                brandId:{{ $inventory->item->brand->id }}, unitId:{{ $inventory->item->unit->id }}})"
-                                class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal"><i
-                                    class="fa fa-pen-to-square me-1"></i>Edit</button>
-                            <button type="button"33333
-                                wire:click="$dispatch('delete-prompt', {item:{{ $item }}})"
-                                class="btn btn-sm btn-danger"><i class="fa fa-trash me-1"></i>Delete</button>
-                        </td>
+                        <td class="text-nowrap text-right">{{ $inventory->createdAt }}</td>
+                        <td class="text-nowrap text-right">{{ $inventory->updatedAt }}</td>
                     </tr>
                 @endforeach
             </tbody>

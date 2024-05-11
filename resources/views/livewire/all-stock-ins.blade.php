@@ -22,7 +22,7 @@
                         ])
                         @include('shared-layout.table-sortable-th', [
                             'colName' => 'quantity',
-                            'colDisplay' => 'Quantity',
+                            'colDisplay' => 'Qty',
                         ])
                         @include('shared-layout.table-sortable-th', [
                             'colName' => 'code',
@@ -71,7 +71,7 @@
                             {{ ($this->stockIns->currentpage() - 1) * $this->stockIns->perpage() + $loop->index + 1 }}
                         </th>
                         <td class="text-nowrap">{{ $stockIn->supplierName }}</td>
-                        <td class="text-nowrap">{{ $stockIn->quantity }}</td>
+                        <td class="text-center">{{ $stockIn->quantity }}</td>
                         <td class="text-nowrap">{{ $stockIn->code }}</td>
                         <td class="text-nowrap">{{ $stockIn->itemName }}</td>
                         <td class="text-nowrap">{{ $stockIn->description }}</td>
