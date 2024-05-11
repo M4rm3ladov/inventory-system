@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('stock_outs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('inventory_id')->constrained();
-            $table->foreignId('supplier_id')->constrained();
-            $table->bigInteger('ref_number');
+            // $table->foreignId('supplier_id')->constrained();
+            // $table->bigInteger('ref_number');
             $table->integer('quantity');
             $table->text('remarks');
             $table->timestamp('transact_date');

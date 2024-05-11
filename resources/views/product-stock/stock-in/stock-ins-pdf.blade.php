@@ -18,7 +18,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Brand</th>
-                    <th">Category</th>
+                    <th>Category</th>
                     <th>Unit</th>
                     <th>Transaction Date</th>
                     <th>Created At</th>

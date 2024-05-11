@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Supplier</th>
                     <th>Quantity</th>
                     <th>Code</th>
                     <th>Name</th>
@@ -26,20 +26,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($stockReturns as $stockReturn)
+                @foreach ($stockOuts as $stockOut)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $stockReturn['supplierName'] }}</td>
-                        <td class="quantity">{{ $stockReturn['quantity'] }}</td>
-                        <td>{{ $stockReturn['code'] }}</td>
-                        <td>{{ $stockReturn['itemName'] }}</td>
-                        <td>{{ $stockReturn['description'] }}</td>
-                        <td>{{ $stockReturn['brandName'] }}</td>
-                        <td>{{ $stockReturn['categoryName'] }}</td>
-                        <td>{{ $stockReturn['unitName'] }}</td>
-                        <td>{{ $stockReturn['transact_date'] }}</td>
-                        <td>{{ $stockReturn['createdAt'] }}</td>
-                        <td>{{ $stockReturn['updatedAt'] }}</td>
+                        <td class="quantity">{{ $stockOut['quantity'] }}</td>
+                        <td>{{ $stockOut['code'] }}</td>
+                        <td>{{ $stockOut['itemName'] }}</td>
+                        <td>{{ $stockOut['description'] }}</td>
+                        <td>{{ $stockOut['brandName'] }}</td>
+                        <td>{{ $stockOut['categoryName'] }}</td>
+                        <td>{{ $stockOut['unitName'] }}</td>
+                        <td>{{ $stockOut['transact_date'] }}</td>
+                        <td>{{ $stockOut['createdAt'] }}</td>
+                        <td>{{ $stockOut['updatedAt'] }}</td>
                     </tr>
                 @endforeach
             </tbody>
