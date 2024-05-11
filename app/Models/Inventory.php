@@ -20,6 +20,10 @@ class Inventory extends Model
         return $this->hasMany(StockIn::class);
     }
 
+    public function stockReturns() {
+        return $this->hasMany(StockReturn::class);
+    }
+
     public function itemCategory()
     {
         return $this->belongsToThrough(ItemCategory::class, Item::class);

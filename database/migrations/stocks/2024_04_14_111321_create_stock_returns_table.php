@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('inventory_id')->constrained();
             $table->foreignId('supplier_id')->constrained();
-            $table->bigInteger('ref_number');
+            // $table->bigInteger('ref_number');
             $table->integer('quantity');
             $table->text('remarks');
             $table->timestamp('transact_date');
