@@ -194,66 +194,66 @@ class AllStockTransfers extends Component
         return view('livewire.all-stock-transfers');
     }
 
-    // public function exportPdf()
-    // {
-    //     $stockTransfers = StockTransfer::search($this->searchQuery)
-    //         ->select(
-    //             'branches.name AS branchTo',
-    //             'items.name AS itemName',
-    //             'item_categories.name AS categoryName',
-    //             'brands.name AS brandName',
-    //             'units.name AS unitName',
-    //             'items.*',
-    //             'stock_transfers.created_at AS createdAt',
-    //             'stock_transfers.updated_at AS updatedAt',
-    //             'stock_transfers.*'
-    //         )
-    //         ->join('branches', 'stock_transfers.branch_id_to', '=', 'branches.id')
-    //         ->join('inventories', 'stock_transfers.inventory_id', '=', 'inventories.id')
-    //         ->join('items', 'inventories.item_id', '=', 'items.id')
-    //         ->join('item_categories', 'items.item_category_id', '=', 'item_categories.id')
-    //         ->join('brands', 'items.brand_id', '=', 'brands.id')
-    //         ->join('units', 'items.unit_id', '=', 'units.id')
-    //         ->when($this->branchTo != 'All', function ($query) {
-    //             $query->where('branches.name', $this->branchTo);
-    //         })
-    //         ->when($this->category != 'All', function ($query) {
-    //             $query->where('item_categories.name', $this->category);
-    //         })
-    //         ->when($this->brand != 'All', function ($query) {
-    //             $query->where('brands.name', $this->brand);
-    //         })
-    //         ->when($this->unit != 'All', function ($query) {
-    //             $query->where('units.name', $this->unit);
-    //         })
-    //         ->when($this->dateFrom && $this->dateTo != '', function ($query) {
-    //             $query->whereBetween('transact_date', [$this->dateFrom, $this->dateTo]);
-    //         })
-    //         ->where('inventories.branch_id', '=', Auth::user()->branch_id)
-    //         ->get()
-    //         ->toArray();
+    public function exportPdf()
+    {
+        $stockTransfers = StockTransfer::search($this->searchQuery)
+            ->select(
+                'branches.name AS branchTo',
+                'items.name AS itemName',
+                'item_categories.name AS categoryName',
+                'brands.name AS brandName',
+                'units.name AS unitName',
+                'items.*',
+                'stock_transfers.created_at AS createdAt',
+                'stock_transfers.updated_at AS updatedAt',
+                'stock_transfers.*'
+            )
+            ->join('branches', 'stock_transfers.branch_id_to', '=', 'branches.id')
+            ->join('inventories', 'stock_transfers.inventory_id', '=', 'inventories.id')
+            ->join('items', 'inventories.item_id', '=', 'items.id')
+            ->join('item_categories', 'items.item_category_id', '=', 'item_categories.id')
+            ->join('brands', 'items.brand_id', '=', 'brands.id')
+            ->join('units', 'items.unit_id', '=', 'units.id')
+            ->when($this->branchTo != 'All', function ($query) {
+                $query->where('branches.name', $this->branchTo);
+            })
+            ->when($this->category != 'All', function ($query) {
+                $query->where('item_categories.name', $this->category);
+            })
+            ->when($this->brand != 'All', function ($query) {
+                $query->where('brands.name', $this->brand);
+            })
+            ->when($this->unit != 'All', function ($query) {
+                $query->where('units.name', $this->unit);
+            })
+            ->when($this->dateFrom && $this->dateTo != '', function ($query) {
+                $query->whereBetween('transact_date', [$this->dateFrom, $this->dateTo]);
+            })
+            ->where('inventories.branch_id', '=', Auth::user()->branch_id)
+            ->get()
+            ->toArray();
 
-    //     $pdf = Pdf::loadView('product-stock.stock-transfer.stock-transfers-pdf', ['stockTransfers' => $stockTransfers]);
+        $pdf = Pdf::loadView('product-stock.stock-transfer.stock-transfers-pdf', ['stockTransfers' => $stockTransfers]);
 
-    //     return response()->streamDownload(function () use ($pdf) {
-    //         echo $pdf->stream();
-    //     }, 'stockTransfers.pdf');
-    // }
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'stockTransfers.pdf');
+    }
 
-    // public function exportExcel()
-    // {
-    //     return (new StockTransfersExport(
-    //         $this->searchQuery,
-    //         $this->sortBy,
-    //         $this->sortDirection,
-    //         $this->branchTo,
-    //         $this->category,
-    //         $this->brand,
-    //         $this->unit,
-    //         $this->dateFrom,
-    //         $this->dateTo,
-    //     ))->download('stockTransfers.xls');
-    // }
+    public function exportExcel()
+    {
+        return (new StockTransfersExport(
+            $this->searchQuery,
+            $this->sortBy,
+            $this->sortDirection,
+            $this->branchTo,
+            $this->category,
+            $this->brand,
+            $this->unit,
+            $this->dateFrom,
+            $this->dateTo,
+        ))->download('stockTransfers.xls');
+    }
 
     public function updatedSearchQuery()
     {
