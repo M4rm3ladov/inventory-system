@@ -13,9 +13,7 @@
                             <span class="fs-6 text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-1 ">
-                        @livewire('search-item')
-                    </div>
+                    @include('shared-layout.search-item')
                     <div class="mb-1 w-25">
                         <label class="me-1 form-label">Quantity:</label>
                         <input type="number" class="form-control @error('form.quantity') is-invalid  @enderror"

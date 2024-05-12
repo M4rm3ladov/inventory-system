@@ -10,11 +10,13 @@ use App\Models\Unit;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Lazy()]
 class AllStockOuts extends Component
 {
     use WithPagination;

@@ -2,11 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\StockInForm;
+use App\Livewire\Forms\StockTransferForm;
+use App\Models\Branch;
 use App\Models\Inventory;
 use App\Models\Item;
-use App\Models\StockIn;
-use App\Models\Supplier;
+use App\Models\StockTransfer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
@@ -14,9 +14,9 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class CreateStockIn extends Component
+class CreateStockTransfer extends Component
 {
-    public StockInForm $form;
+    public StockTransferForm $form;
     public $isEditing = false;
 
     #[Validate('required')]
@@ -24,103 +24,136 @@ class CreateStockIn extends Component
 
     public $items = [];
 
-    public function mount() {
+    public function mount()
+    {
         $this->form->transact_date = now()->toDateString('yyyy-mm-dd');
     }
 
-    public function store() {
+    public function store()
+    {
         $this->validate();
-        
+
         // create new or update if existing
-        $inventory = Inventory::firstOrNew([
-            'item_id' => $this->form->item_id,
-            'branch_id' => Auth::user()->branch_id,
-        ],
-        [
-            'item_id' => $this->form->item_id,
-            'branch_id' => Auth::user()->branch_id,
-        ]);
-        
-        $inventory->quantity = $inventory->quantity + $this->form->quantity;
-        $inventory->save();
-        $this->form->inventory_id = $inventory->id;
+        $inventoryFrom = Inventory::firstOrNew(
+            [
+                'item_id' => $this->form->item_id,
+                'branch_id' => Auth::user()->branch_id,
+            ],
+            [
+                'item_id' => $this->form->item_id,
+                'branch_id' => Auth::user()->branch_id,
+            ]
+        );
 
-        StockIn::create($this->form->all());
+        $inventoryTo = Inventory::firstOrNew(
+            [
+                'item_id' => $this->form->item_id,
+                'branch_id' => $this->form->branch_id_to,
+            ],
+            [
+                'item_id' => $this->form->item_id,
+                'branch_id' => $this->form->branch_id_to,
+            ]
+        );
 
-        $this->dispatch('stock-in-created', [
+        $inventoryTo->quantity += $this->form->quantity;
+        $inventoryTo->save();
+        $inventoryFrom->quantity -= $this->form->quantity;
+        $inventoryFrom->save();
+
+        $this->form->inventory_id = $inventoryFrom->id;
+
+        StockTransfer::create($this->form->all());
+
+        $this->dispatch('stock-transfer-created', [
             'title' => 'Success!',
-            'text' => 'Stock in record saved successfully!',
+            'text' => 'Stock transfer record saved successfully!',
             'icon' => 'success',
         ]);
 
         $this->resetInputs();
-        $this->dispatch('refresh-stock-in')->to(AllStockIns::class);
+        $this->dispatch('refresh-stock-transfer')->to(AllStockTransfers::class);
     }
 
-    public function update() {
+    public function update()
+    {
         $this->validate();
 
-        // reset the item count in inventory before updating with new value
-        $inventory = Inventory::findOrfail($this->form->inventory_id);
-        $inventory->quantity = $inventory->quantity - $this->form->prevQuantity + $this->form->quantity;
-        $inventory->save();
-
-        $this->form->stockIn->update(
+        $this->form->stockTransfer->update(
             $this->form->all()
         );
+        // reset the item count in inventory before updating with new value
+        $inventoryFrom = Inventory::findOrfail($this->form->inventory_id);
+        $inventoryFrom->quantity += $this->form->prevQuantity - $this->form->quantity;
+        $inventoryFrom->save();
 
-        $this->dispatch('stock-in-created', [
+        $inventoryTo = Inventory::where('item_id', '=', $this->form->item_id)
+            ->where('branch_id', '=', $this->form->branch_id_to)
+            ->firstOrFail();
+        $inventoryTo->quantity -= $this->form->prevQuantity - $this->form->quantity;
+        $inventoryTo->save();
+
+        $this->dispatch('stock-transfer-created', [
             'title' => 'Success!',
-            'text' => 'Stock in record saved successfully!',
+            'text' => 'Stock transfer record saved successfully!',
             'icon' => 'success',
         ]);
 
         $this->close();
 
-        $this->dispatch('stock-in-updated');
-        $this->dispatch('refresh-stock-in')->to(AllStockIns::class);
+        $this->dispatch('stock-transfer-updated');
+        $this->dispatch('refresh-stock-transfer')->to(AllStockTransfers::class);
     }
 
-    #[On('stock-in-edit')]
+    #[On('stock-transfer-edit')]
     public function edit($id, $details)
     {
         $this->form->isEditing = $this->isEditing = true;
-        $this->form->setStockIn($id);
+        $this->form->setStockTransfer($id);
         $itemDetails = "{$details['code']} | {$details['itemName']} {$details['description']} | {$details['brandName']} " .
             "| {$details['categoryName']} | {$details['unitName']}";
         $this->item_search = $itemDetails;
     }
 
-    #[On('stock-in-delete')]
-    public function delete($id, $quantity, $inventory_id) {
+    #[On('stock-transfer-delete')]
+    public function delete($id, $branch_id_to, $item_id, $quantity, $inventory_id)
+    {
         // decrement inventory item count
-        $inventory = Inventory::findOrFail($inventory_id);
-        $inventory->quantity -= $quantity;
-        $inventory->save();
+        $inventoryFrom = Inventory::findOrFail($inventory_id);
+        $inventoryFrom->quantity += $quantity;
+        $inventoryFrom->save();
 
-        $stockIn = StockIn::findOrfail($id);
-        $stockIn->delete();
-        
-        $this->dispatch('stock-in-deleted');
-        $this->dispatch('refresh-stock-in')->to(AllStockIns::class);
+        $inventoryTo = Inventory::where('item_id', '=', $item_id)
+            ->where('branch_id', '=', $branch_id_to)
+            ->firstOrFail();
+        $inventoryTo->quantity -= $quantity;
+        $inventoryTo->save();
+
+        $stockTransfer = StockTransfer::findOrfail($id);
+        $stockTransfer->delete();
+
+        $this->dispatch('stock-transfer-deleted');
+        $this->dispatch('refresh-stock-transfer')->to(AllStockTransfers::class);
     }
 
-    public function resetInputs() {
+    public function resetInputs()
+    {
         $this->form->resetInputs();
         $this->item_search = '';
         $this->resetValidation();
     }
 
     #[On('reset-modal')]
-    public function close() {
+    public function close()
+    {
         $this->resetInputs();
         $this->form->isEditing = $this->isEditing = false;
     }
 
     #[Computed()]
-    public function suppliers()
+    public function branches()
     {
-        return Supplier::orderBy('name', 'ASC')->get();
+        return Branch::orderBy('name', 'ASC')->get();
     }
 
     public function updatedItemSearch()
@@ -178,6 +211,6 @@ class CreateStockIn extends Component
 
     public function render()
     {
-        return view('livewire.create-stock-in');
+        return view('livewire.create-stock-transfer');
     }
 }

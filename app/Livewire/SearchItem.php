@@ -50,7 +50,7 @@ class SearchItem extends Component
     public function populateItem($item) {
         $this->searchQuery = $item['details'];
         $id = $item['id'];
-        $this->dispatch('populate-item-id', $id);
+        //$this->dispatch('populate-item-id', $id);
     }
 
     public function render()

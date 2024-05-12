@@ -1,17 +1,16 @@
-<div wire:ignore.self class="modal fade" id="stockInModal" tabindex="-1" aria-labelledby="stockInLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="stockTransferModal" tabindex="-1" aria-labelledby="stockTransferLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="stockInModalLabel">{{ $isEditing ? 'Edit Stock In Record' : 'Add Stock In Record' }}</h1>
+                <h1 class="modal-title fs-5" id="stockTransferModalLabel">
+                    {{ $isEditing ? 'Edit Stock Transfer Record' : 'Add Stock Transfer Record' }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form>
                 <div class="modal-body">
                     <div class="mb-1 ">
                         <input type="text" wire:model="form.item_id">
-                        @error('form.item_id')
-                            <span class="fs-6 text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                     @include('shared-layout.search-item')
                     <div class="mb-1 w-25">
@@ -23,13 +22,13 @@
                         @enderror
                     </div>
                     <div class="mb-1">
-                        <label class="me-1 form-label">Supplier:</label>
-                        <select wire:model="form.supplier_id"
-                            class="form-select form-select-sm @error('form.supplier_id') is-invalid  @enderror">
-                            <option value={{ -1 }} selected>--Choose Supplier--</option>
-                            @foreach ($this->suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">
-                                    {{ $supplier->name }}
+                        <label class="me-1 form-label">Branch:</label>
+                        <select wire:model="form.branch_id_to"
+                            class="form-select form-select-sm @error('form.branch_id_to') is-invalid  @enderror">
+                            <option value={{ -1 }} selected>--Choose Branch--</option>
+                            @foreach ($this->branches as $branch)
+                                <option value="{{ $branch->id }}">
+                                    {{ $branch->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -67,7 +66,7 @@
 </div>
 @script
     <script>
-        $wire.on('stock-in-created', (event) => {
+        $wire.on('stock-transfer-created', (event) => {
             const data = event
             swal.fire({
                 icon: data[0]['icon'],
@@ -78,7 +77,7 @@
             })
         })
 
-        $wire.on('stock-in-deleted', () => {
+        $wire.on('stock-transfer-deleted', () => {
             swal.fire({
                 icon: 'success',
                 title: 'Success!',
@@ -88,8 +87,8 @@
             })
         })
 
-        $wire.on('stock-in-updated', () => {
-            $('#stockInModal').modal('hide')
+        $wire.on('stock-transfer-updated', () => {
+            $('#stockTransferModal').modal('hide')
         })
     </script>
 @endscript
