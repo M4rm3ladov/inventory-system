@@ -37,7 +37,7 @@
                         <td>{{ $stockTransfer['brandName'] }}</td>
                         <td>{{ $stockTransfer['categoryName'] }}</td>
                         <td>{{ $stockTransfer['unitName'] }}</td>
-                        <td>{{ $stockTransfer['transact_date'] }}</td>
+                        <td>{{ \Carbon\Carbon::parse($stockCount['transact_date'])->format('Y-m-d')}}</td>
                         <td>{{ $stockTransfer['createdAt'] }}</td>
                         <td>{{ $stockTransfer['updatedAt'] }}</td>
                     </tr>

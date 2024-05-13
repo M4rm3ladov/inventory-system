@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stock In Records</title>
+    <title>Stock Adjust Records</title>
 </head>
 <body>
-    <h1>Stock In Details</h1>
+    <h1>Stock Adjust Details</h1>
     <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Supplier</th>
                     <th>Quantity</th>
                     <th>Code</th>
                     <th>Name</th>
@@ -21,25 +20,28 @@
                     <th>Category</th>
                     <th>Unit</th>
                     <th>Transaction Date</th>
+                    <th>Period From</th>
+                    <th>Period To</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($stockIns as $stockIn)
+                @foreach ($stockCounts as $stockCount)
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td>{{ $stockIn['supplierName'] }}</td>
-                        <td class="quantity">{{ $stockIn['quantity'] }}</td>
-                        <td>{{ $stockIn['code'] }}</td>
-                        <td>{{ $stockIn['itemName'] }}</td>
-                        <td>{{ $stockIn['description'] }}</td>
-                        <td>{{ $stockIn['brandName'] }}</td>
-                        <td>{{ $stockIn['categoryName'] }}</td>
-                        <td>{{ $stockIn['unitName'] }}</td>
+                        <td class="quantity">{{ $stockCount['quantity'] }}</td>
+                        <td>{{ $stockCount['code'] }}</td>
+                        <td>{{ $stockCount['itemName'] }}</td>
+                        <td>{{ $stockCount['description'] }}</td>
+                        <td>{{ $stockCount['brandName'] }}</td>
+                        <td>{{ $stockCount['categoryName'] }}</td>
+                        <td>{{ $stockCount['unitName'] }}</td>
                         <td>{{ \Carbon\Carbon::parse($stockCount['transact_date'])->format('Y-m-d')}}</td>
-                        <td>{{ $stockIn['createdAt'] }}</td>
-                        <td>{{ $stockIn['updatedAt'] }}</td>
+                        <td>{{ \Carbon\Carbon::parse($stockCount['period_from'])->format('Y-m-d')}}</td>
+                        <td>{{ \Carbon\Carbon::parse($stockCount['period_to'])->format('Y-m-d')}}</td>
+                        <td>{{ $stockCount['createdAt'] }}</td>
+                        <td>{{ $stockCount['updatedAt'] }}</td>
                     </tr>
                 @endforeach
             </tbody>

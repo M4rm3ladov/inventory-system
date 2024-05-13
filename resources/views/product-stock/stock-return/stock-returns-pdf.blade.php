@@ -37,7 +37,7 @@
                         <td>{{ $stockReturn['brandName'] }}</td>
                         <td>{{ $stockReturn['categoryName'] }}</td>
                         <td>{{ $stockReturn['unitName'] }}</td>
-                        <td>{{ $stockReturn['transact_date'] }}</td>
+                        <td>{{ \Carbon\Carbon::parse($stockCount['transact_date'])->format('Y-m-d')}}</td>
                         <td>{{ $stockReturn['createdAt'] }}</td>
                         <td>{{ $stockReturn['updatedAt'] }}</td>
                     </tr>

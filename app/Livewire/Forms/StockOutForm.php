@@ -14,10 +14,10 @@ class StockOutForm extends Form
 
     public $inventory_id = -1;
 
-    #[Validate('exists:items,id', as: 'item')]    
+    #[Validate('required|exists:items,id', as: 'item')]    
     public $item_id = -1;
 
-    #[Validate('integer|min:1')]
+    #[Validate('required|integer|min:1')]
     public $quantity;
 
     public $prevQuantity;

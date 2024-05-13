@@ -17,8 +17,9 @@ return new class extends Migration
         Schema::create('stock_counts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('inventory_id')->constrained();
-            $table->bigInteger('ref_number');
+            // $table->bigInteger('ref_number');
             $table->integer('quantity');
+            $table->text('remarks');
             $table->timestamp('transact_date');
             $table->timestamp('period_from')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('period_to')->default(DB::raw('CURRENT_TIMESTAMP'));
